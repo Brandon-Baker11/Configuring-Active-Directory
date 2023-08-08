@@ -125,32 +125,140 @@ Once finished installing, your system will prompt you to restart.
 ![Screenshot26](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/6829af79-1965-49cc-b4c5-49cf9ef478f7)
 
 
+We will now create a dedicated admin account for this domain instead of using the built-in admin account. From the ***Server Manager Dashboard*** click ***Tools*** at the top right of the screen and select ***Active Directory Users and Computers***
+![Screenshot27](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/b7e2a7b0-9bc9-4df3-9891-183c5ee1b1f1)
 
 
+Right-click your domain select ***New > Organizational Unit*** and this OU will hold the new admin account we will create. In the ***New Object - Organizational Unit*** pop window type ***_ADMINS*** as the name and uncheck the option below the name field.
+
+Click ***OK***
+![Screenshot29](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/a0178ee0-41f5-4ce5-b792-f5161413c378)
 
 
+Now that the Organizational Unit has been created, we can create a new admin account as well as give it the proper permissions and priviledges. Right-click the ***_ADMINS*** OU we just created, select ***New*** and click ***User***.
+![Screenshot30](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/7fb66111-e591-41b4-9ecf-00e84ec9953f)
 
 
+To make it easy, you can use your name as the name of the new admin account. Enter your name in the ***First name*** and ***Last name*** fields. And in the ***User logon name*** field, a common way that usernames are assigned are first initial then last name, we will be doing the same but we will add ***a-*** to show that it's an admin account.
+
+Click ***Next***
+![Screenshot31](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/f0f14d60-b850-4dc7-99b3-af21912f70e0)
 
 
+And then on the next page type in a password for the account and uncheck the ***User must change password at next logon*** box and check the ***Password never expires*** box if this is just a practice lab.
+
+Click ***Next*** and then click ***Finish***
+![Screenshot32](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/c79f2f74-778a-4f7a-a2c5-7d1a0d726b4d)
 
 
+Now we will add the user to the domain admin group. Right-click the user and select ***Properties***. 
+![Screenshot33](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/770cbf53-873e-4118-9dc2-70047a9086b9)
 
 
+Go to the ***Member of*** tab and click the ***Add*** button. Here we will be adding the user to the earlier mentioned group. In the ***Enter the object names to select*** field type ***Domain adminis*** and click ***Check Names*** and click ***OK*** then ***Apply** and ***OK***
+![Screenshot34](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/ab7c43d1-039a-41c2-a399-78986261d6c0)
 
 
+Now log out of your account and sign in as the domain admin that we just created.
+We will now add the DHCP server to our domain so the Windows 10 client we add can receive an IP address. Back on the ***Server Manager Dashboard*** select ***Add roles and features***
+![Screenshot35](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/7851824a-de95-41fe-becd-c13ee2d47efe)
 
 
+Click ***Next***
+![Screenshot36](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/7a68386f-7ad3-4963-a454-2c6fc10a6a02)
 
 
+Click ***Next***
+![Screenshot37](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/f2d56aff-a4b9-4254-af2a-3f705036f4dc)
 
 
+Notice how the server's name changed from ***DC*** to ***DC.mydomain.com*** after we created the domain.
+
+Click ***Next***
+![Screenshot38](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/9b1179ec-9b35-48bf-8aff-e23ab97bcee1)
 
 
+Select ***DHCP Server***, click ***Add feature*** and click ***Next***
+![Screenshot39](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/71a3853d-df3f-46af-a5d9-f1dba8c0e1f7)
 
 
+Click ***Next***
+![Screenshot40](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/c7727a87-dc0c-4bee-a481-62f110658559)
 
 
+Click ***Next***
+![Screenshot41](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/b0103cca-b978-46d3-a12d-350df19d707d)
+
+
+Click ***Install*** and once it is done installing click ***Close***
+![Screenshot42](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/6902d8c5-00d5-4ef6-a881-4a7ce590fc0b)
+
+
+Now that we have DHCP on our domain, we will configure the scope. Click ***Tools*** and select ***DHCP***
+![Screenshot43](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/d7861787-0058-4876-8f51-dc999db4c527)
+
+
+Expand your domain in the left pane, and right-click ***IPv4*** and select ***New Scope***
+click ***Next in the setup wizard
+![Screenshot44](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/576c70ad-5dc9-4f9a-a7a1-ea0eea31a8e1)
+
+For the name you can name it after the IP address range that will be used.
+Click ***Next***
+![Screenshot45](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/b73458b4-b974-4fd2-88a4-680d97d5d7a0)
+
+
+And for the start and end IP addresses we will use the address range that we used in the name of the scope with a subnet of ***24***.
+Click ***Next***
+![Screenshot46](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/12b4174e-a567-4f2b-a2c5-3a80eb50b84a)
+
+
+We will not be including any address exclusions, so click ***Next***
+![Screenshot47](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/47a30621-498b-4178-83cb-16c271b5ffec)
+
+
+Lease duration is how long a device will hold on to an IP address before it is put back into the pool of available IP addresses. Click ***Next***
+![Screenshot48](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/48c98d13-3e3b-4dce-8ce1-5b51cb6d1c8f)
+
+
+Select ***Yes*** and click ***Next***
+![Screenshot49](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/4703c98e-7f1a-489e-96be-cb4161674a65)
+
+
+Type the DC's IP address in the ***IP address*** field, click ***Add***, then click ***Next***
+![Screenshot50](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/f3b3a877-78ca-4108-a73b-fe1a048a1832)
+
+
+Make sure that your domain name is listed in the ***Parent domain*** field and that the IP address for your DC is in the IP address box below and click ***Next***
+![Screenshot51](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/b6152c87-389d-42e6-9d3f-5833db1545c1)
+
+
+Click ***Next***
+![Screenshot52](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/11989669-671b-4fdf-8ae6-1c9bd8810bd3)
+
+
+Select ***Yes*** and click ***Next*** and then click ***Finish***
+![Screenshot53](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/78fdb156-44b1-474a-89b5-5399e92943e5)
+
+
+Now right-click your domain server name and select ***Authorize***
+![Screenshot54](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/b9718a44-c5b1-4853-a981-b240e5b3c419)
+
+
+Right-click it again and select ***Refresh*** and your ***IPv4*** and ***IPv6*** nodes should be green and your scope should be seen when you expand your ***IPv4*** node.
+![Screenshot55](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/84c616ce-5603-4f52-aef7-02981372fc06)
+
+
+Now we will open our client machine and change the name to ***Client1*** by right-clicking the Windows charm in the bottom left and selecting ***System*** and click ***Rename this PC***. Your system will automatically restart after completing this.
+![Screenshot56](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/971eca19-74ec-4045-b255-fc5e0713b349)
+![Screenshot57](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/ef9e1d1b-08d3-40d2-9bbe-efd836f49b03)
+
+
+We will now check our IP configuration and do a ping test in the command prompt. We will run the commands ***ipconfig*** to check the configurations and ***ping mydomain.com*** to check if the two systems can communicate. After following these steps the results from your command inputs should look like this:
+![Screenshot58](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/a58db081-a0d7-4590-9b27-b4ebb5eddaa3)
+
+
+And if you go back to the DC, you should notice that the ***Client1*** machine is now listed under the ***Address Leases*** node.
+![Screenshot59](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/a4ea13e9-3a19-496e-8c83-daebe1931f50)
 
 
 
