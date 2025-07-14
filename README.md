@@ -13,6 +13,7 @@ This tutorial will show the steps to create a basic Windows network environment 
 ## Deployment and Configuration Steps
 In this lab, we will go through the steps of connecting a client machine to your Domain Controller (DC). These steps include:
 
+- Configure the network adapters for the VMs in Virtual Box
 - Configuring the IP Address for the DC's internal network
 - Installing Active Directory Domain Services
 - Creating the domain
@@ -24,7 +25,15 @@ In this lab, we will go through the steps of connecting a client machine to your
 <img width="1280" height="720" alt="VMWare Network-2" src="https://github.com/user-attachments/assets/9e5d6cf8-f67f-4609-8038-56cf438fe5ab" />
 
 
-We will first configure the IP address for the DC's internal network. Click the ***Network*** icon in the system tray located at the bottom right corner of your screen, click your network, and then select ***Change Adapter Settings***
+Before we fire up the virtual machines, the network adapters for the VMs need to be configured. For the domain controller we need to have two network adapters, a public one to access the internet and a private one for clients to connect to for services like DHCP, DNS, and routing. In virtual box, select the DC vm and select network and follow the configs in the screenshot.
+<img width="961" height="633" alt="DC01-Adapter1" src="https://github.com/user-attachments/assets/3132b151-f663-4d48-b8e2-2587cc60e85c" />
+<img width="961" height="633" alt="DC01-Adapter2" src="https://github.com/user-attachments/assets/4cc1d149-d744-44f4-b5c9-bbd22495240e" />
+
+Now do the same for the client virtual machine
+<img width="961" height="633" alt="CLIENT1-Adapter" src="https://github.com/user-attachments/assets/12badcaa-b6eb-4c83-bbce-590d8ae32782" />
+
+
+Let's configure the IP address for the DC's internal network. Click the ***Network*** icon in the system tray located at the bottom right corner of your screen, click your network, and then select ***Change Adapter Settings***
 ![Screenshot1](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/89f52ce1-dd2a-4e7b-9087-9e0424191977)
 ![Screenshot2](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/bd4da9fc-ad1b-4ed6-9619-a949eb704f69)
 
