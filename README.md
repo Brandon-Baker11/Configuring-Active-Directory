@@ -1,14 +1,14 @@
 ![what-is-active-directory-and-why-is-it-used](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/b70fada4-5e40-4341-b2d3-36ab560c0227)
 # Configuring Active Directory (OracleVM VirtualBox)
-This tutorial will show the steps to create a basic Windows network environment on a VirtualBox VM that runs on Windows Server 2019 as the Domain Controller (DC) and Windows 10 (Client).
+This tutorial will show the steps to create a basic Windows network environment on a VirtualBox VM that runs on Windows Server 2022 as the Domain Controller (DC) and Windows 11 (Client).
 
 ## Environments and Technologies Used
 - OracleVM VirtualBox
 - Active Directory Domain Services
 
 ## Operating Systems Used
-- Windows Server 2019
-- Windows 10 (22H2)
+- Windows Server 2022
+- Windows 11 (24H2)
 
 ## Deployment and Configuration Steps
 In this lab, we will go through the steps of connecting a client machine to your Domain Controller (DC). These steps include:
@@ -17,11 +17,11 @@ In this lab, we will go through the steps of connecting a client machine to your
 - Installing Active Directory Domain Services
 - Creating the domain
 - Creating an admin account for the domain
-- Adding a DHCP role to the DC
+- Configuring a DHCP server to the DC
 - Configuring the DHCP scope
 - Testing domain connectivity with a created user
 
-![VMWare Network](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/d5aa3be6-9445-4bfe-bce3-7959eaa5e5a9)
+<img width="1280" height="720" alt="VMWare Network-2" src="https://github.com/user-attachments/assets/9e5d6cf8-f67f-4609-8038-56cf438fe5ab" />
 
 
 We will first configure the IP address for the DC's internal network. Click the ***Network*** icon in the system tray located at the bottom right corner of your screen, click your network, and then select ***Change Adapter Settings***
