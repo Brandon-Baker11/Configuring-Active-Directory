@@ -34,13 +34,13 @@ Now do the same for the client virtual machine
 
 
 Let's configure the IP address for the DC's internal network. Click the ***Network*** icon in the system tray located at the bottom right corner of your screen, click your network, and then select ***Change Adapter Settings***
-![Screenshot1](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/89f52ce1-dd2a-4e7b-9087-9e0424191977)
-![Screenshot2](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/bd4da9fc-ad1b-4ed6-9619-a949eb704f69)
+<img width="1027" height="857" alt="Screenshot from 2025-07-16 17-56-46" src="https://github.com/user-attachments/assets/4f202d35-7c32-45ef-a422-ec91bb7bcdb6" />
+<img width="1052" height="882" alt="Screenshot from 2025-07-16 18-03-19" src="https://github.com/user-attachments/assets/7c68f971-83fb-4dbe-8a6c-937808700aa5" />
 
 
 We will next identify the network being used as our domain's internal network. You identify it by double-clicking your network, and in the ***Status*** window that pops up click the ***Details*** button. You will then look for the ***IPv4*** address. If it has an Automatic Private IP Addressing (APIPA), we will be changing that IP address. You can tell it's an APIPA address if the address begins with 169.254 in the first two octets.
-![Screenshot3](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/29bb4617-f78e-483f-9e29-b9620974bbae)
-![Screenshot4](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/ad698356-f21b-449e-a825-e02450a267c4)
+<img width="1052" height="882" alt="Screenshot from 2025-07-16 18-15-46" src="https://github.com/user-attachments/assets/8b4e4441-2c04-4857-a4de-c19c8fd7d3c3" />
+<img width="1052" height="882" alt="Screenshot from 2025-07-16 18-17-24" src="https://github.com/user-attachments/assets/d3a3c02c-8a08-4701-9b56-89510b2a15c9" />
 
 
 Close the ***Details*** window, select ***Properties*** in the ***Status*** window, and double-click ***Internet Protocol Version 4 (TCP/IPv4)***. In the ***Internet Protocol Version 4 (TCP/IPv4)*** window, we will be assinging the IP address for the internal network.
@@ -49,7 +49,7 @@ Close the ***Details*** window, select ***Properties*** in the ***Status*** wind
 
 
 Make sure you click the ***Use the following IP address:*** bubble in the ***Internet Protocol Version 4 (TCP/IPv4) Properties*** window. Then type the following address information and click ***OK***.
-> We are using ***127.0.0.1*** as the preferred DNS server because that address is known as the "loopback" address meaning that when this address is pinged, the machine that pings it will ping itself and the DC address will use itself as the DNS server.
+> We are using ***127.0.0.1*** as the preferred DNS server because that address is known as the "loopback" address meaning that when this address is pinged, the machine that pings it will ping itself and the DC will use itself as the DNS server.
 ![Screenshot7](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/ebbcd7eb-84e8-45ae-82d6-211f94557b91)
 
 
