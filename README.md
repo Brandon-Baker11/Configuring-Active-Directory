@@ -44,65 +44,53 @@ We will next identify the network being used as our domain's internal network. Y
 
 
 Close the ***Details*** window, select ***Properties*** in the ***Status*** window, and double-click ***Internet Protocol Version 4 (TCP/IPv4)***. In the ***Internet Protocol Version 4 (TCP/IPv4)*** window, we will be assinging the IP address for the internal network.
-![Screenshot5](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/5cf4308f-e591-4509-8874-c2a69cb2bbaf)
-![Screenshot6](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/8399f98d-dbe0-4684-8da7-b999842c7e8d)
+<img width="1051" height="881" alt="Screenshot from 2025-07-16 21-59-18" src="https://github.com/user-attachments/assets/825eba6e-fb44-4e17-ab40-6d76ff089c7e" />
+<img width="1051" height="881" alt="Screenshot from 2025-07-16 22-00-52" src="https://github.com/user-attachments/assets/c5cb6a27-6053-4cd8-8500-c48d2fbe552c" />
 
 
-Make sure you click the ***Use the following IP address:*** bubble in the ***Internet Protocol Version 4 (TCP/IPv4) Properties*** window. Then type the following address information and click ***OK***.
+
+Make sure ***Use the following IP address:*** is selected in the ***Internet Protocol Version 4 (TCP/IPv4) Properties*** window. Then type the following address information and click ***OK***.
 > We are using ***127.0.0.1*** as the preferred DNS server because that address is known as the "loopback" address meaning that when this address is pinged, the machine that pings it will ping itself and the DC will use itself as the DNS server.
-![Screenshot7](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/ebbcd7eb-84e8-45ae-82d6-211f94557b91)
+<img width="1051" height="881" alt="Screenshot from 2025-07-16 22-04-16" src="https://github.com/user-attachments/assets/3047cca8-f7b7-48e2-ab24-a098e49f39c5" />
 
 
-Next, we will rename the PC to make it easier to identify as the DC. Right-click the ***Start*** charm at the bottom left of the screen, select ***System***, and click ***Rename this PC***. We will name it ***DC*** and follow the prompts shown.
-![Screenshot8](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/b13d78ca-82c7-46ab-8fde-f0a5b06611e5)
-![Screenshot9](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/e65c5d0e-a025-477b-b11c-2255d70111ee)
+To make things more distinguishable, we will rename these to network adapters as well. One for connections internal to the network and one for external connections.
+> The adapter with the IP configurations we made will be the internal NIC and the one that is given IP configurations from the ISP will be the external. Bringing up the details window will show these details.
+<img width="1051" height="881" alt="Screenshot from 2025-07-16 22-11-15" src="https://github.com/user-attachments/assets/061d8368-b125-44a7-a690-cc7e665cbb2e" />
+
+
+Next, we will rename the PC to make it easier to identify as the DC. Right-click the ***Start*** charm at the bottom left of the screen, select ***System***, and click ***Rename this PC***. We will name it ***DC-01*** and follow the prompts shown. You will be required to restart the machine for the new name to take affect.
+<img width="1051" height="881" alt="Screenshot from 2025-07-16 22-19-31" src="https://github.com/user-attachments/assets/1340c1f0-062f-487b-bae7-2bf6aa5938ce" />
+<img width="1051" height="881" alt="Screenshot from 2025-07-16 22-22-32" src="https://github.com/user-attachments/assets/72f7d5ea-7afb-43f4-a6ea-e6b9d02692b7" />
 
 
 Now we will be installing Active Directory in the server manager. In the ***Server Manager Dashboard*** click ***Add roles and features***.
-![Screenshot10](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/191ef064-7e70-400a-b046-1a8f0e00a340)
+<img width="1051" height="881" alt="Screenshot from 2025-07-16 22-27-32" src="https://github.com/user-attachments/assets/9e7b6696-27a9-48ec-a7f4-8647cb08af91" />
 
 
-Click ***Next***
-![Screenshot11](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/a405e88f-0a3d-40ef-8bc9-7dfac476fbdc)
-
-
-Click ***Next***
-![Screenshot12](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/7fbd63ce-1d8e-437a-a57a-f8810b9a4c52)
-
-
-In the ***Server Selection*** window, you should only have the server that we just renamed ***DC***. Make sure it's selected and click ***Next***
-![Screenshot13](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/f387b1d5-cd31-4e83-ba84-5e7aa10cc171)
+Click ***Next*** twice in the ***Add Roles and Features Wizard*** and you will arrive at the ***Server Selection*** window, you should only have the server that we just renamed ***DC***. Make sure it's selected and click ***Next***
+<img width="1051" height="881" alt="Screenshot from 2025-07-16 22-32-19" src="https://github.com/user-attachments/assets/9b587ca8-8e08-42f5-8296-993dbd58e839" />
 
 
 In the ***Select server roles*** window select ***Active Directory Domain Services*** and click ***Add Features*** in the pop-up window. Multiple roles begin with ***Active Directory***, so make sure you don't click the wrong one by accident.
-
-Click ***Next***
-![Screenshot14](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/2667e6d3-9b39-49aa-9ab9-4db236df1ee2)
+<img width="1051" height="881" alt="Screenshot from 2025-07-16 22-38-02" src="https://github.com/user-attachments/assets/ad8e5e81-4b39-408d-98e8-79efea4fdb10" />
 
 
-Click ***Next***
-![Screenshot15](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/1c5ca714-2512-4804-9466-af8e3775e145)
-
-
-Click ***Next***
-![Screenshot16](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/57d2d87d-0211-4b21-a745-0d0d34f95b2c)
-
-
-Click ***Install*** and once it's done installing click ***Close***
-> Installing roles in the server manager can take some time.
-![Screenshot17](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/32e79243-eddf-4947-a695-f76b995eacd6)
+Click ***Next*** three times and you will arrive on the ***Confirmation*** section. Click ***Install*** and once it's done installing click ***Close***
+> Installing roles in the server manager can take some time. 
+<img width="1051" height="881" alt="Screenshot from 2025-07-16 22-41-14" src="https://github.com/user-attachments/assets/a67c26d4-abda-4cf9-b0c9-576a396fea69" />
 
 
 You should now see the role ***AD DS*** added under ***Roles and Server Groups*** in the ***Server Manager Dashboard***
-![Screenshot18](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/85ffbf0e-1eac-4e31-a250-5510db8464b9)
+<img width="1051" height="881" alt="Screenshot from 2025-07-16 22-48-02" src="https://github.com/user-attachments/assets/85ad656d-65fd-4619-85a9-f1b3f7a47340" />
 
 
 We will now promote the server to a domain controller. Click the Flag at the top of the ***Server Manager Dashboard*** and click ***Promote the server to a domain controller***
 > What we are doing here will be creating the actual domain.
-![Screenshot19](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/c0fa3e9c-0401-4323-a584-61cd00222d78)
+<img width="1051" height="881" alt="Screenshot from 2025-07-16 22-52-45" src="https://github.com/user-attachments/assets/d7de9242-a38f-406f-b383-56bba469c716" />
 
 
-Now in the ***Deployment Configuration*** section, click ***Add a new forest*** and in the ***Root domain name*** field type the name of your domain. In my example, I'll be using ***mydomain.com*** as the name of my domain. 
+Now in the ***Deployment Configuration*** section, click ***Add a new forest*** and in the ***Root domain name*** field type the name of your domain. In my example, I'll be using ***mycooltestorg.com*** as the name of my domain. 
 
 Click ***Next***
 ![Screenshot20](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/4617a804-df76-401e-a57d-847a073205fc)
