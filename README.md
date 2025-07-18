@@ -93,67 +93,52 @@ We will now promote the server to a domain controller. Click the Flag at the top
 Now in the ***Deployment Configuration*** section, click ***Add a new forest*** and in the ***Root domain name*** field type the name of your domain. In my example, I'll be using ***mycooltestorg.com*** as the name of my domain. 
 
 Click ***Next***
-![Screenshot20](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/4617a804-df76-401e-a57d-847a073205fc)
+<img width="1074" height="897" alt="Screenshot from 2025-07-17 22-25-05" src="https://github.com/user-attachments/assets/268eb34f-91cb-481a-818d-cfd8dd4898c2" />
 
 
 Here you will be prompted to create a password for the ***Directory Services Restore Mode***. Create a password and click ***Next***
-![Screenshot21](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/a4ccdaaf-14dc-4dbd-9454-0987183fd608)
+<img width="1074" height="897" alt="Screenshot from 2025-07-17 22-27-28" src="https://github.com/user-attachments/assets/f3b48bdb-d7ce-48fb-a371-4241e61e2f9a" />
 
 
-Click ***Next***
-![Screenshot22](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/18c685c5-1d35-4ad0-957c-861767b2047b)
-
-
-Click ***Next***
-![Screenshot23](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/4d2cbb6c-0bd2-46b5-a1c4-e9cd6d1aeb07)
-
-
-Click ***Next***
-![Screenshot24](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/d63da796-d3f6-40d1-b300-ad6d384a7d00)
-
-
-Click ***Next***
-![Screenshot25](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/dc4f5afb-a0a8-4869-9589-39d5f84fca09)
-
-
-Click ***Install***
-Once finished installing, your system will prompt you to restart.
-> This may take a while.
-![Screenshot26](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/6829af79-1965-49cc-b4c5-49cf9ef478f7)
+We will keep the default settings for the rest of the configuration, so click next until you arrive at the ***Prerequisites Check*** section. Click ***Install*** when the opotion becomes available.
+Once finished installing, your system will sign you out. When the DC restarts, you will see the name of your domain when logging in.
+> This may take several minutes.
+<img width="1074" height="897" alt="Screenshot from 2025-07-17 22-32-23" src="https://github.com/user-attachments/assets/b33f371a-a1e9-4d48-a57c-b93ca4e37f45" />
 
 
 We will now create a dedicated admin account for this domain instead of using the built-in admin account. From the ***Server Manager Dashboard*** click ***Tools*** at the top right of the screen and select ***Active Directory Users and Computers***
-![Screenshot27](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/b7e2a7b0-9bc9-4df3-9891-183c5ee1b1f1)
+<img width="1052" height="882" alt="Screenshot from 2025-07-17 22-43-32" src="https://github.com/user-attachments/assets/543a66ce-0c65-4b4f-b395-c9faaca4a288" />
 
 
 Right-click your domain select ***New > Organizational Unit*** and this OU will hold the new admin account we will create. In the ***New Object - Organizational Unit*** pop window type ***_ADMINS*** as the name and uncheck the option below the name field.
 
 Click ***OK***
-![Screenshot29](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/a0178ee0-41f5-4ce5-b792-f5161413c378)
+<img width="1052" height="882" alt="Screenshot from 2025-07-17 22-48-19" src="https://github.com/user-attachments/assets/fc298bee-2afb-4295-946b-5b577db2b82d" />
+
 
 
 Now that the Organizational Unit has been created, we can create a new admin account as well as give it the proper permissions and priviledges. Right-click the ***_ADMINS*** OU we just created, select ***New*** and click ***User***.
-![Screenshot30](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/7fb66111-e591-41b4-9ecf-00e84ec9953f)
+<img width="1052" height="882" alt="Screenshot from 2025-07-17 22-49-25" src="https://github.com/user-attachments/assets/bfb6816b-a807-4855-8839-e1d7aecd88cc" />
 
 
-To make it easy, you can use your name as the name of the new admin account. Enter your name in the ***First name*** and ***Last name*** fields. And in the ***User logon name*** field, a common way that usernames are assigned are first initial then last name, we will be doing the same but we will add ***a-*** to show that it's an admin account.
+To make it easy, you can use your name as the name of the new admin account. Enter your name in the ***First name*** and ***Last name*** fields. And in the ***User logon name*** field, the naming convention that I use is the last name followed by the first initial, we will be doing the same but we will add ***adm*** suffix to show that it's an admin account.
 
 Click ***Next***
-![Screenshot31](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/f0f14d60-b850-4dc7-99b3-af21912f70e0)
+<img width="1052" height="882" alt="Screenshot from 2025-07-17 22-52-48" src="https://github.com/user-attachments/assets/cbe02419-a5e5-48c4-8854-938ad9b90941" />
 
 
 And then on the next page type in a password for the account and uncheck the ***User must change password at next logon*** box and check the ***Password never expires*** box if this is just a practice lab.
 
 Click ***Next*** and then click ***Finish***
-![Screenshot32](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/c79f2f74-778a-4f7a-a2c5-7d1a0d726b4d)
+<img width="1052" height="882" alt="Screenshot from 2025-07-17 22-53-34" src="https://github.com/user-attachments/assets/46ebc7d8-702f-4faf-88e5-af42b97cee97" />
 
 
 Now we will add the user to the domain admin group. Right-click the user and select ***Properties***. 
-![Screenshot33](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/770cbf53-873e-4118-9dc2-70047a9086b9)
+<img width="1052" height="882" alt="Screenshot from 2025-07-17 23-00-59" src="https://github.com/user-attachments/assets/61d90120-0570-42c8-8f5d-85bc998b6a3f" />
 
 
 Go to the ***Member of*** tab and click the ***Add*** button. Here we will be adding the user to the earlier mentioned group. In the ***Enter the object names to select*** field type ***Domain adminis*** and click ***Check Names*** and click ***OK*** then ***Apply** and ***OK***
-![Screenshot34](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/ab7c43d1-039a-41c2-a399-78986261d6c0)
+<img width="1052" height="882" alt="Screenshot from 2025-07-17 23-02-16" src="https://github.com/user-attachments/assets/cad79e2b-abad-4e08-b1c5-5f357971491f" />
 
 
 Now log out of your account and sign in as the domain admin that we just created.
