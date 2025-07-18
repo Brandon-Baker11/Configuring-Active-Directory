@@ -275,16 +275,31 @@ Expand IPv4 and select ***Server Options*** and you will see that the DC shows a
 
 
 Now we will open our client machine and change the name to ***CLIENT-1*** by right-clicking the Windows charm in the bottom left and selecting ***System*** and click ***Rename this PC***. Your system will automatically restart after completing this.
-![Screenshot56](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/971eca19-74ec-4045-b255-fc5e0713b349)
-![Screenshot57](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/ef9e1d1b-08d3-40d2-9bbe-efd836f49b03)
+<img width="1051" height="881" alt="Screenshot from 2025-07-18 15-00-44" src="https://github.com/user-attachments/assets/b5357bcc-54dd-4e39-a3da-b76e9c572ed1" />
+<img width="1051" height="881" alt="Screenshot from 2025-07-18 15-01-33" src="https://github.com/user-attachments/assets/57db98e6-c3fc-4003-a0a1-b366c50dce7d" />
 
 
-We will now check our IP configuration and do a ping test in the command prompt. We will run the commands ***ipconfig*** to check the configurations and ***ping mydomain.com*** to check if the two systems can communicate. After following these steps the results from your command inputs should look like this:
-![Screenshot58](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/a58db081-a0d7-4590-9b27-b4ebb5eddaa3)
+Now if you go back to the DHCP service the DC, you should notice that the ***Client1*** machine is now listed under the ***Address Leases*** node.
+<img width="1064" height="890" alt="Screenshot from 2025-07-18 15-05-09" src="https://github.com/user-attachments/assets/0a9bd442-ea05-4d22-971a-14491c4bec7f" />
 
 
-And if you go back to the DC, you should notice that the ***Client1*** machine is now listed under the ***Address Leases*** node.
-![Screenshot59](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/a4ea13e9-3a19-496e-8c83-daebe1931f50)
+We will now do some tests in the command prompt to confirm the client can reach the domain ocntroller and is able to route through the domain controller.
+Run ***ipconfig*** and ***ping 172.16.0.1*** to check the IP configurations settings of the client and confirm that the DC is reachable
+>You can see the client is connected to the domain, the ip address of the client is in the correct range of the DHCP pool we configured, and the DC's ip appears as the default gateway which allows connections outside of the network.
+<img width="1051" height="881" alt="Screenshot from 2025-07-18 15-11-33" src="https://github.com/user-attachments/assets/53e58102-619c-4233-b223-b646ff48dbb5" />
+
+
+Let's perform another test and ping Google's dns server to make sure we can reach it and also perform a name server lookup to verify our DC is resolving DNS names.
+Run ***ping 8.8.8.8*** and you should receive the following output from the terminal. 
+<img width="1051" height="881" alt="Screenshot from 2025-07-18 15-19-10" src="https://github.com/user-attachments/assets/6a033757-1bb9-40f8-a355-06a07f8fd897" />
+
+Now run ***nslookup google.com*** and you shoold receive output similar to this
+<img width="1051" height="881" alt="Screenshot from 2025-07-18 15-21-32" src="https://github.com/user-attachments/assets/556950bd-1fbd-417d-a750-ff8e15ff3eb5" />
+
+
+After following these steps you now simulated a live Active Directory environment with a Domain Controller that hosts DHCP, DNS, and Routing/NAT services to its clients.
+
+
 
 
 
