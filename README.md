@@ -55,8 +55,12 @@ Make sure ***Use the following IP address:*** is selected in the ***Internet Pro
 
 
 To make things more distinguishable, we will rename these to network adapters as well. One for connections internal to the network and one for external connections.
-> The adapter with the IP configurations we made will be the internal NIC and the one that is given IP configurations from the ISP will be the external. Bringing up the details window will show these details.
+> The adapter with the IP configurations we made will be the internal NIC and the one that is given IP configurations from the ISP will be the external. ***Right-Click*** an adapter, select ***Status*** and select ***Details*** will show these details.
 <img width="1051" height="881" alt="Screenshot from 2025-07-16 22-11-15" src="https://github.com/user-attachments/assets/061d8368-b125-44a7-a690-cc7e665cbb2e" />
+
+
+I will be naming my naming my adapters ***PUBLIC NIC*** and ***PRIVATE NIC***
+<img width="1052" height="882" alt="Screenshot from 2025-07-18 10-59-39" src="https://github.com/user-attachments/assets/c9a0b14e-2e89-4af6-ade7-b1d147aa88c6" />
 
 
 Next, we will rename the PC to make it easier to identify as the DC. Right-click the ***Start*** charm at the bottom left of the screen, select ***System***, and click ***Rename this PC***. We will name it ***DC-01*** and follow the prompts shown. You will be required to restart the machine for the new name to take affect.
@@ -133,104 +137,144 @@ Click ***Next*** and then click ***Finish***
 <img width="1052" height="882" alt="Screenshot from 2025-07-17 22-53-34" src="https://github.com/user-attachments/assets/46ebc7d8-702f-4faf-88e5-af42b97cee97" />
 
 
-Now we will add the user to the domain admin group. Right-click the user and select ***Properties***. 
+Now we will add the user to the ***Domain Admins*** group. Right-click the user and select ***Properties***. 
 <img width="1052" height="882" alt="Screenshot from 2025-07-17 23-00-59" src="https://github.com/user-attachments/assets/61d90120-0570-42c8-8f5d-85bc998b6a3f" />
 
 
-Go to the ***Member of*** tab and click the ***Add*** button. Here we will be adding the user to the earlier mentioned group. In the ***Enter the object names to select*** field type ***Domain adminis*** and click ***Check Names*** and click ***OK*** then ***Apply** and ***OK***
+Go to the ***Member of*** tab and click the ***Add*** button. Here we will be adding the user to the earlier mentioned group. In the ***Enter the object names to select*** field type ***Domain admins*** and click ***Check Names*** and click ***OK*** then ***Apply** and ***OK***
 <img width="1052" height="882" alt="Screenshot from 2025-07-17 23-02-16" src="https://github.com/user-attachments/assets/cad79e2b-abad-4e08-b1c5-5f357971491f" />
 
+Now that you have an admin account aside from the built-in admin account, sign out and sign into the account you just created
 
-Now log out of your account and sign in as the domain admin that we just created.
+To ensure that the client can reach the internet through the domain controller, we will configure Routing Access on the DC. On the Server Manager Dashboard select ***Add Roles and Features***
+<img width="1052" height="882" alt="Screenshot from 2025-07-18 10-16-15" src="https://github.com/user-attachments/assets/4688614b-2347-4974-8aef-82dcc64b24c0" />
+
+
+Click next in the ***Add Roles and Features*** wizard until you get to the ***Server Roles*** section. Check the box next to ***Remote Access*** and click ***Next*** until you arrive at the ***Role Services*** section
+<img width="1052" height="882" alt="Screenshot from 2025-07-18 10-20-05" src="https://github.com/user-attachments/assets/99d4d6dd-19f3-4abb-bf82-da2c7793e935" />
+
+
+On the ***Role Services*** section, select ***Routing*** and click ***Add Features*** in the small pop-up window
+>DirectAccess and VPN (RAS) is automatically selected
+<img width="1052" height="882" alt="Screenshot from 2025-07-18 10-24-29" src="https://github.com/user-attachments/assets/aadad935-7589-49b0-8b86-e25b02e27a96" />
+
+
+Click ***Next*** until you are given the option to install then select ***Install***
+>This may take several minutes
+<img width="1052" height="882" alt="Screenshot from 2025-07-18 10-26-40" src="https://github.com/user-attachments/assets/198cc5d9-e114-4246-a2e2-d453d58248b2" />
+
+
+Once the feature wizard finishes the install, click ***Close***. Click ***Tools*** at the top right of the Server Manager Dashboard and select ***Routing and Remote Access***
+<img width="1052" height="882" alt="Screenshot from 2025-07-18 10-36-48" src="https://github.com/user-attachments/assets/1e2ce2a2-ce34-4584-94c0-d07246af2948" />
+
+
+In the ***Routing and Remote Access*** window, right-click the DC and select ***Configure and Enable Routing and Remote Access*** then click ***Next*** in the wizard
+<img width="1052" height="882" alt="Screenshot from 2025-07-18 10-41-06" src="https://github.com/user-attachments/assets/b0845c31-08d7-4baa-a02e-69d480d516d7" />
+
+
+Select ***Network Address Translation (NAT)*** this setting is the key to getting our client access to the internet through the DC's public IP. Click ***Next***
+<img width="1052" height="882" alt="Screenshot from 2025-07-18 10-45-11" src="https://github.com/user-attachments/assets/5b11b357-d641-4471-96b4-1022debc2e28" />
+
+
+You should be able to see the network adapters that are available on the DC in the ***Network Interfaces*** field; the ones that we renamed. If the ***Network Interfaces*** is empty, just click ***Cancel*** and close the Routing and Remote Access window and reopen it and the NICs should populate
+
+If they did populate, select the public interface and click ***Next*** and ***Finish***
+>The DC should have a green up arrow indicating that the service is running.
+<img width="1052" height="882" alt="Screenshot from 2025-07-18 11-03-51" src="https://github.com/user-attachments/assets/a13a2dc7-bcd9-4e8e-b357-b7d50ca1603d" />
+
+
 We will now add the DHCP server to our domain so the Windows 10 client we add can receive an IP address. Back on the ***Server Manager Dashboard*** select ***Add roles and features***
-![Screenshot35](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/7851824a-de95-41fe-becd-c13ee2d47efe)
+<img width="1052" height="882" alt="Screenshot from 2025-07-18 11-17-06" src="https://github.com/user-attachments/assets/6c78e755-efa9-4f83-a033-fbc2563cab0f" />
 
 
-Click ***Next***
-![Screenshot36](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/7a68386f-7ad3-4963-a454-2c6fc10a6a02)
+Click ***Next*** twice
 
-
-Click ***Next***
-![Screenshot37](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/f2d56aff-a4b9-4254-af2a-3f705036f4dc)
-
-
-Notice how the server's name changed from ***DC*** to ***DC.mydomain.com*** after we created the domain.
+Notice how the server's name changed from ***DC*** to ***DC-01.mycooltestorg.com*** after we created the domain.
 
 Click ***Next***
-![Screenshot38](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/9b1179ec-9b35-48bf-8aff-e23ab97bcee1)
+<img width="1052" height="882" alt="Screenshot from 2025-07-18 11-22-09" src="https://github.com/user-attachments/assets/b96c5042-b03d-4432-8678-69829abd63f2" />
 
 
 Select ***DHCP Server***, click ***Add feature*** and click ***Next***
-![Screenshot39](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/71a3853d-df3f-46af-a5d9-f1dba8c0e1f7)
+<img width="1052" height="882" alt="Screenshot from 2025-07-18 11-23-33" src="https://github.com/user-attachments/assets/3b3ab361-8754-49da-9f5b-fe2c69b4573a" />
 
 
-Click ***Next***
-![Screenshot40](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/c7727a87-dc0c-4bee-a481-62f110658559)
-
-
-Click ***Next***
-![Screenshot41](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/b0103cca-b978-46d3-a12d-350df19d707d)
-
-
-Click ***Install*** and once it is done installing click ***Close***
-![Screenshot42](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/6902d8c5-00d5-4ef6-a881-4a7ce590fc0b)
+Click ***Next*** until you can click ***Install***. Once it is done installing click ***Close***
+>This may take several minutes.
+<img width="1052" height="882" alt="Screenshot from 2025-07-18 11-25-32" src="https://github.com/user-attachments/assets/5ee81531-8ef6-4877-9e67-53aeef25892d" />
 
 
 Now that we have DHCP on our domain, we will configure the scope. Click ***Tools*** and select ***DHCP***
-![Screenshot43](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/d7861787-0058-4876-8f51-dc999db4c527)
+<img width="1052" height="882" alt="Screenshot from 2025-07-18 11-27-56" src="https://github.com/user-attachments/assets/7fb4ff06-10e0-40bb-9663-9fbff1564f68" />
 
 
 Expand your domain in the left pane, and right-click ***IPv4*** and select ***New Scope***
-click ***Next in the setup wizard
-![Screenshot44](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/576c70ad-5dc9-4f9a-a7a1-ea0eea31a8e1)
+click ***Next*** in the setup wizard
+<img width="1052" height="882" alt="Screenshot from 2025-07-18 11-30-48" src="https://github.com/user-attachments/assets/df0c5f35-aa4d-46fc-9b5e-875397cdb99b" />
+
 
 For the name you can name it after the IP address range that will be used.
 Click ***Next***
-![Screenshot45](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/b73458b4-b974-4fd2-88a4-680d97d5d7a0)
+<img width="1052" height="882" alt="Screenshot from 2025-07-18 11-32-30" src="https://github.com/user-attachments/assets/65f56813-4c41-4e2e-a4ba-ad645b81c32c" />
 
 
 And for the start and end IP addresses we will use the address range that we used in the name of the scope with a subnet of ***24***.
 Click ***Next***
-![Screenshot46](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/12b4174e-a567-4f2b-a2c5-3a80eb50b84a)
+<img width="1052" height="882" alt="Screenshot from 2025-07-18 11-35-04" src="https://github.com/user-attachments/assets/f01928e3-0684-4228-9db9-89987cf86207" />
 
 
 We will not be including any address exclusions, so click ***Next***
-![Screenshot47](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/47a30621-498b-4178-83cb-16c271b5ffec)
+<img width="1052" height="882" alt="Screenshot from 2025-07-18 11-37-25" src="https://github.com/user-attachments/assets/cd3a9fee-53f0-4428-b28b-b8aa180d6cf8" />
 
 
-Lease duration is how long a device will hold on to an IP address before it is put back into the pool of available IP addresses. Click ***Next***
-![Screenshot48](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/48c98d13-3e3b-4dce-8ce1-5b51cb6d1c8f)
+Lease duration is how long a device will hold on to an IP address before it is put back into the pool of available IP addresses. We can keep the default value. Click ***Next***
+<img width="1052" height="882" alt="Screenshot from 2025-07-18 11-38-14" src="https://github.com/user-attachments/assets/46d2ece5-5ef9-4b6a-afdf-985dc3623f36" />
 
 
 Select ***Yes*** and click ***Next***
-![Screenshot49](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/4703c98e-7f1a-489e-96be-cb4161674a65)
+<img width="1052" height="882" alt="Screenshot from 2025-07-18 11-38-41" src="https://github.com/user-attachments/assets/16f8570e-73d9-423d-aca3-616dec5ad0e0" />
 
 
 Type the DC's IP address in the ***IP address*** field, click ***Add***, then click ***Next***
-![Screenshot50](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/f3b3a877-78ca-4108-a73b-fe1a048a1832)
+<img width="1052" height="882" alt="Screenshot from 2025-07-18 11-40-45" src="https://github.com/user-attachments/assets/7e3e017b-ee7a-48d5-8238-8094a1605477" />
 
 
-Make sure that your domain name is listed in the ***Parent domain*** field and that the IP address for your DC is in the IP address box below and click ***Next***
-![Screenshot51](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/b6152c87-389d-42e6-9d3f-5833db1545c1)
-
-
-Click ***Next***
-![Screenshot52](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/11989669-671b-4fdf-8ae6-1c9bd8810bd3)
+Make sure that your domain name is listed in the ***Parent domain*** field and that the IP address for your DC is in the IP address box below and click ***Next*** twice
+<img width="1052" height="882" alt="Screenshot from 2025-07-18 11-43-41" src="https://github.com/user-attachments/assets/40311bf7-bb48-496c-849d-83d40d6ce951" />
 
 
 Select ***Yes*** and click ***Next*** and then click ***Finish***
-![Screenshot53](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/78fdb156-44b1-474a-89b5-5399e92943e5)
+<img width="1052" height="882" alt="Screenshot from 2025-07-18 11-46-27" src="https://github.com/user-attachments/assets/af509efa-4a86-4268-8aca-3731b15ab6af" />
 
 
 Now right-click your domain server name and select ***Authorize***
-![Screenshot54](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/b9718a44-c5b1-4853-a981-b240e5b3c419)
+<img width="1052" height="882" alt="Screenshot from 2025-07-18 11-48-53" src="https://github.com/user-attachments/assets/478dc2e3-26aa-45ca-9058-c50db1cec8a4" />
 
 
 Right-click it again and select ***Refresh*** and your ***IPv4*** and ***IPv6*** nodes should be green and your scope should be seen when you expand your ***IPv4*** node.
-![Screenshot55](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/84c616ce-5603-4f52-aef7-02981372fc06)
+<img width="1052" height="882" alt="Screenshot from 2025-07-18 11-50-37" src="https://github.com/user-attachments/assets/5c079946-d97c-4f12-ade2-ecfd68519ae5" />
 
 
-Now we will open our client machine and change the name to ***Client1*** by right-clicking the Windows charm in the bottom left and selecting ***System*** and click ***Rename this PC***. Your system will automatically restart after completing this.
+Expand ***IPv4*** right-click ***Server Options*** and select ***Configure Options***
+<img width="1051" height="881" alt="Screenshot from 2025-07-18 13-10-44" src="https://github.com/user-attachments/assets/d6604e2b-f497-418c-bb80-9327d15020df" />
+
+
+Check the box next to ***003 Router*** and enter the DC's IP address in the ***IP Address*** field
+
+Click ***Add***
+
+Click ***Apply***
+<img width="1051" height="881" alt="Screenshot from 2025-07-18 13-14-33" src="https://github.com/user-attachments/assets/f030ab59-b20c-40d5-8c32-d0a620b67987" />
+
+To make sure these settings stick, right-click the server, highlight ***All Tasks***, then select ***Restart***
+<img width="1051" height="881" alt="Screenshot from 2025-07-18 13-17-38" src="https://github.com/user-attachments/assets/6bf5693c-50be-420c-b0c3-98880e3b616d" />
+
+
+Expand IPv4 and select ***Server Options*** and you will see that the DC shows as a router.
+<img width="1051" height="881" alt="Screenshot from 2025-07-18 13-20-35" src="https://github.com/user-attachments/assets/8fe3a261-61e0-43c3-a8b9-8cf27c7419ae" />
+
+
+Now we will open our client machine and change the name to ***CLIENT-1*** by right-clicking the Windows charm in the bottom left and selecting ***System*** and click ***Rename this PC***. Your system will automatically restart after completing this.
 ![Screenshot56](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/971eca19-74ec-4045-b255-fc5e0713b349)
 ![Screenshot57](https://github.com/Brandon-Baker11/Configuring-Active-Directory/assets/140644499/ef9e1d1b-08d3-40d2-9bbe-efd836f49b03)
 
