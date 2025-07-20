@@ -1,7 +1,7 @@
 ﻿
-Get-Content "C:\Path\to\csv" | ForEach-Object { # Gets the content from desired .csv
-    $DomainName = 'DC=mycooltestorg,DC=com'
-    $OrgUnitPath = ''
+Get-Content "C:\Path\to\file.txt" | ForEach-Object { # Gets the content from desired .txt file
+    $DomainName = 'DC=yourhomelabdomain,DC=com' # Enter your domain path
+    $OrgUnitPath = '' # Placeholder variable
     $OrgUnits = (Split-Path $_ -Parent).Split('\') # Creates an array by splitting each line at the '\' delimiter
     [array]::Reverse($OrgUnits) 
     $OrgUnits | ForEach-Object {
@@ -19,4 +19,6 @@ Get-Content "C:\Path\to\csv" | ForEach-Object { # Gets the content from desired 
     #Write-Host "new org unit name: $NewOrgUnitName`n" -ForegroundColor White -BackgroundColor Black
 
     New-ADOrganizationalUnit -Name $NewOrgUnitName -path $OrgUnitPath -ProtectedFromAccidentalDeletion $false
+    Write-Host "Successfully Created OU 'OU=$NewOrgUnitName,$OrgUnitPath'" -ForegroundColor Green -BackgroundColor Black
+    Get-ADOrganizationalUnit -Identity "OU=$NewOrgUnitName,$OrgUnitPath"
 }
