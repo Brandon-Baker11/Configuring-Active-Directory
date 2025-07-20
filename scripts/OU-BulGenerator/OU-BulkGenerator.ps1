@@ -9,7 +9,7 @@
         }
         $OrgUnitPath = $OrgUnitPath + 'OU=' + $_ + ',' # Updates the empty string to the new $OrgUnitPath
     }
-    $OrgUnitPath += $DomainName # Once nested loop is finished, concatenates the path to the $DomainName variable
+    $OrgUnitPath += $DomainName # Once nested loop is finished, concatenates $DomainName variable to the end of the path
 
     # Uncomment line below to double check the $OrgUnitPath is what you expect it to be
     #Write-Host "org unit path: $OrgUnitPath" -ForegroundColor Cyan -BackgroundColor Black 
