@@ -1,5 +1,5 @@
 ﻿
-Get-Content "C:\Users\bakerbadm\Documents\Scripts\ORGANIZATION.csv" | ForEach-Object { # Gets the content from desired .csv
+Get-Content "C:\Path\to\csv" | ForEach-Object { # Gets the content from desired .csv
     $DomainName = 'DC=mycooltestorg,DC=com'
     $OrgUnitPath = ''
     $OrgUnits = (Split-Path $_ -Parent).Split('\') # Creates an array by splitting each line at the '\' delimiter
