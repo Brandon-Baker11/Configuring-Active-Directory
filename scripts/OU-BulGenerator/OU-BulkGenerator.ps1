@@ -18,6 +18,11 @@
     #Write-Host "new org unit name: $NewOrgUnitName`n" -ForegroundColor White -BackgroundColor Black
 
     New-ADOrganizationalUnit -Name $NewOrgUnitName -path $OrgUnitPath -ProtectedFromAccidentalDeletion $false
-    Write-Host "Successfully Created OU 'OU=$NewOrgUnitName,$OrgUnitPath'" -ForegroundColor Green -BackgroundColor Black
-    Get-ADOrganizationalUnit -Identity "OU=$NewOrgUnitName,$OrgUnitPath"
+   if (Get-ADOrganizationalUnit -Identity "OU=$NewOrgUnitName,$OrgUnitPath") {
+        Write-Host "Successfully Created OU 'OU=$NewOrgUnitName,$OrgUnitPath'" -ForegroundColor Green -BackgroundColor Black
+        Get-ADOrganizationalUnit -Identity "OU=$NewOrgUnitName,$OrgUnitPath"
+    }
+    else {
+        Write-Host "'OU=$NewOrgUnitName,$OrgUnitPath' was not created and does not exist" -ForegroundColor Red -BackgroundColor Black
+    }
 }
