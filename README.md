@@ -3,7 +3,7 @@
 This tutorial will show the steps to create a basic Windows network environment on a VirtualBox VM that runs on Windows Server 2022 as the Domain Controller (DC) and Windows 11 (Client).
 
 ## Environments and Technologies Used
-- OracleVM VirtualBox
+- OracleVM VirtualBox (7.0.16_Ubuntur162802)
 - Active Directory Domain Services
 
 ## Operating Systems Used
@@ -14,7 +14,7 @@ This tutorial will show the steps to create a basic Windows network environment 
 In this lab, we will go through the steps of connecting a client machine to your Domain Controller (DC). These steps include:
 
 - Configure the network adapters for the VMs in Virtual Box
-- Configuring the IP Address for the DC's internal network
+- Configuring the IP Addressing for the DC's network adapters
 - Installing Active Directory Domain Services
 - Creating the domain
 - Creating an admin account for the domain
@@ -22,7 +22,7 @@ In this lab, we will go through the steps of connecting a client machine to your
 - Configuring the DHCP scope
 - Testing domain connectivity with a created user
 
-<img width="1280" height="720" alt="VMWare Network-2" src="https://github.com/user-attachments/assets/9e5d6cf8-f67f-4609-8038-56cf438fe5ab" />
+<img width="1280" height="720" alt="VMWare Network" src="https://github.com/user-attachments/assets/28e9fe5a-824a-4f9f-a42c-9f6a9644a0fd" />
 
 
 Before we fire up the virtual machines, the network adapters for the VMs need to be configured. For the domain controller we need to have two network adapters, a public one to access the internet and a private one for clients to connect to for services like DHCP, DNS, and routing. In virtual box, select the DC vm and select network and follow the configs in the screenshot.
