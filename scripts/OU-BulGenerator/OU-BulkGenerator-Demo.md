@@ -3,6 +3,7 @@
 This will be a quick demonstration of the OU-BulkGenerator.ps1 script. Before running this script, ensure that there aren't any empty lines in the file that the script pulls from. The OU's will still be created, you will just get a bunch of errors because the path from that line is null (empty)
 
 Below you can see the .txt file that the script pulls the content from.
+>Be sure that there are no empty lines in this .txt file that is used to pull the OUs from. It will throw errors at you since those lines will be empty.
 <img width="1052" height="882" alt="Screenshot from 2025-07-20 13-26-18" src="https://github.com/user-attachments/assets/52325786-3815-4b26-bf86-030544c164ae" />
 
 
