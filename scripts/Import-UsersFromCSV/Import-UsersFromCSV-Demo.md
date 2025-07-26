@@ -25,4 +25,13 @@ The command to check all of the users is ***$csvData | ForEach-Object {Get-ADUse
 After the command is run, the information for each user will populate like so
 <img width="1052" height="882" alt="Screenshot from 2025-07-25 22-56-03" src="https://github.com/user-attachments/assets/ea9a37e0-5c59-4e4a-9e7a-c0b7d88d011f" />
 
-And to double check the users were place in the proper groups, we will check one of the managers was place in th appropriate security groups.
+And to double check the users were place in the proper groups, we can use the ***Get-ADGroup*** cmdlet and pipe that into the ***Get-ADGroupMember*** to populate all of the users in a security group. We'll use the following command ***Get-ADGroup -Identity "HR_Users" | Get-ADGroupMember***
+<img width="1052" height="882" alt="Screenshot from 2025-07-26 09-55-20" src="https://github.com/user-attachments/assets/dd556df6-847e-4620-a2d1-7868f4eaa41a" />
+
+After running the command, you should get an output of all of the users in the ***HR_Users*** security group like the screenshot below.
+<img width="1052" height="882" alt="Screenshot from 2025-07-26 09-57-39" src="https://github.com/user-attachments/assets/e0f2a124-e557-42ee-9f1d-ca7910286959" />
+
+
+
+
+
