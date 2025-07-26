@@ -16,4 +16,13 @@ Type ***CD*** and the location of where the script is.
 The command can now be run. Type ***.\Import-UsersFromCSV.ps1*** and the script will automate the process of creating new users in Active Directory, include them in their respective OUs and add them to necessary groups as well. As it creates the users, you will see output to the command prompt terminal.
 <img width="1052" height="882" alt="Screenshot from 2025-07-25 18-04-35" src="https://github.com/user-attachments/assets/cc01f2e7-f772-4d62-865e-4e48386ee18e" />
 
+And now we can confirm that users were created by running the ***Get-ADUser*** cmdlet and see if their info is generated. To make sure we get all of the users that were created from the data in the .csv file, we can take the imported csv file and pipe it into  a ***foreach-object*** loop and generate the instance for each user account. We'll use the parameter ***-Filter*** to filter our AD users by name.
 
+First we'll need to make sure $csvData is still defined by running ***$csvData = Import-Csv "C:\Users\bakerbadm\Documents\Scripts\employees.csv"***
+<img width="1052" height="882" alt="Screenshot from 2025-07-25 22-51-18" src="https://github.com/user-attachments/assets/6dd8c77d-1888-490f-9339-798dee92b83a" />
+
+The command to check all of the users is ***$csvData | ForEach-Object {Get-ADUser -Filter "name -like '$($_.firstName) $($_.lastName)'"}***
+After the command is run, the information for each user will populate like so
+<img width="1052" height="882" alt="Screenshot from 2025-07-25 22-56-03" src="https://github.com/user-attachments/assets/ea9a37e0-5c59-4e4a-9e7a-c0b7d88d011f" />
+
+And to double check the users were place in the proper groups, we will check one of the managers was place in th appropriate security groups.
