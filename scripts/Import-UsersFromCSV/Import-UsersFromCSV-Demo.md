@@ -18,7 +18,10 @@ The command can now be run. Type ***.\Import-UsersFromCSV.ps1*** and the script 
 
 And now we can confirm that users were created by running the ***Get-ADUser*** cmdlet and see if their info is generated. To make sure we get all of the users that were created from the data in the .csv file, we can take the imported csv file and pipe it into  a ***foreach-object*** loop and generate the instance for each user account. We'll use the parameter ***-Filter*** to filter our AD users by name.
 
-First we'll need to make sure $csvData is still defined by running ***$csvData = Import-Csv "C:\Users\bakerbadm\Documents\Scripts\employees.csv"***
+First we'll need to make sure $csvData is still defined by running 
+```PowerShell
+$csvData = Import-Csv "C:\Users\bakerbadm\Documents\Scripts\employees.csv"
+```
 <img width="1052" height="882" alt="Screenshot from 2025-07-25 22-51-18" src="https://github.com/user-attachments/assets/6dd8c77d-1888-490f-9339-798dee92b83a" />
 
 The command to check all of the users is ***$csvData | ForEach-Object {Get-ADUser -Filter "name -like '$($_.firstName) $($_.lastName)'"}***
