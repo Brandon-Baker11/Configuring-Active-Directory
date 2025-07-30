@@ -108,7 +108,8 @@ In the Azure Portal under the same management group we have been working with, c
 <img width="1917" height="852" alt="Screenshot from 2025-07-30 18-15-06" src="https://github.com/user-attachments/assets/62784b5b-f3d4-4393-8109-743162018ed3" />
 
 
-
+## Resource Cleanup
+When doing labs in Azure, it's good practice to delete the resources that were created to avoid any unexpected costs added to your subscription. All of the things done today won't cost anything, but it is still good to get into the habit.
 
 
 
