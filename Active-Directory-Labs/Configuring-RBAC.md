@@ -20,7 +20,11 @@ The approach that will be taken will be nesting **Role Groups** within **Access 
 - Service_Desk_Admins_Tier_I → member of Domain_Admins_Users, Local_Admins_Endpoints
 - Service_Desk_Admins_Tier_II → Domain_Admins_Users, Local_Admins_Endpoints Local_Admins_Printers
 - Service_Desk_Admins_Tier_III → member of all permission groups
-<img width="640" height="480" alt="Access (1)" src="https://github.com/user-attachments/assets/5bf7d226-fd34-4580-aa8a-b48b6b98e952" />
+
+See the visual representation below:
+
+<img width="640" height="480" alt="Access (3)" src="https://github.com/user-attachments/assets/52c931ab-1e55-49fb-8b52-2d8940a8410d" />
+
 
 
 
