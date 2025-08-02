@@ -7,6 +7,23 @@ In my AD environment I have a Virginia and Maryland site, several departments wi
 <img width="1039" height="782" alt="Screenshot from 2025-07-31 13-49-58" src="https://github.com/user-attachments/assets/24f1d848-34ee-4c5a-bad8-10254c5d83dd" />
 
 
+## RBAC Structure
+The approach that will be taken will be nesting **Role Groups** within **Access Control Groups**, then assigning individual users to the role groups, allowing them to inherit the access control groups' permissions through the role group it is assigned. We will use the following access control and role groups.
+
+### Access Control Groups:
+- Domain_Admins_Users
+- Local_Admins_Servers
+- Local_Admins_Endpoints
+- Local_Admins_Printers
+
+### Role Groups:
+- Service_Desk_Admins_Tier_I → member of Domain_Admins_Users, Local_Admins_Endpoints
+- Service_Desk_Admins_Tier_II → Domain_Admins_Users, Local_Admins_Endpoints Local_Admins_Printers
+- Service_Desk_Admins_Tier_III → member of all permission groups
+<img width="640" height="480" alt="Access (1)" src="https://github.com/user-attachments/assets/5bf7d226-fd34-4580-aa8a-b48b6b98e952" />
+
+
+
 ## Creating Administrator Account
 We will select one of the IT users and create an alternate account that will be given administrative permissions. Active Directory prevents you from storing two identical objects in the same OU, so I have a separate OU for user accounts and groups that are given admin privileges. This account will be stored in the **Special Users** OU. Right-click the OU you want to place your admin account highlight **New** and select **User**. 
 <img width="1039" height="782" alt="Screenshot from 2025-07-31 17-15-48" src="https://github.com/user-attachments/assets/30692a7e-5351-45b9-8bc0-26ab09f5e321" />
