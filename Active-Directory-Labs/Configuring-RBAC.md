@@ -1,7 +1,5 @@
 # Configuring Role Based Access Control
 
-[Create an Administrator Account](#creating-administrator-account)
-
 Role-Based Access Control (RBAC) is a method for assigning permissions to users based on their role in an organization. Instead of assigning permissions directly to users, permissions are granted to roles (security groups), and users are added to these roles. This allows centralized management, easier audits, and reduced administrative overhead. In this lab, we'll implement RBAC in Active Directory by creating role groups for different Service Desk tiers, nesting them into permission groups, and delegating access at both the domain and local machine levels.
 
 
@@ -28,7 +26,12 @@ See the visual representation below:<br/>
 <img width="640" height="480" alt="Access (3)" src="https://github.com/user-attachments/assets/52c931ab-1e55-49fb-8b52-2d8940a8410d" />
 
 ## Tasks
-
+[Create an Administrator Account](#creating-administrator-account)</br>
+[Role Group Creation and Assignment](#role-group-creation-and-assignment)</br>
+[Building Access Group Structure](#building-access-group-structure)</br>
+[Assigning Access Controls](#assigning-access-controls)</br>
+[Confirm Admin Permissions are Configured Correctly](#confirm-admin-permissions-are-configured-correctly)</br>
+[Conclusion](#conclusion)</br>
 
 <a name="creating-administrator-account"></a>
 ## Creating an Administrator Account
@@ -43,8 +46,8 @@ Since this user will have elevated permissions we will add **adm** at the end of
 Create a password for the user account and since this is a homelab, uncheck **User must change password at next logon** and check **Password never expires** then click **Next** then **Finish**. I don't recommend doing this in a live environment.
 <img width="1039" height="782" alt="Screenshot from 2025-07-31 17-21-04" src="https://github.com/user-attachments/assets/b506f199-d854-47d0-b452-2949f161eded" />
 
-
-## Group Creation and Assignment
+<a name="role-group-creation-and-assignment"></a>
+## Role Group Creation and Assignment
 So we have made and administrator account for one of the IT users. This account doesn't have any special capabilities just yet, we will assign that user's admin account to a group that grants the elevated permissions. We can think of these groups as **Roles**. As mentioned earlier, there will be three tiers of privileges. In the same OU, right-click any empty space, hover over **New** and select **Group**
 <img width="1039" height="782" alt="Screenshot from 2025-07-31 17-32-18" src="https://github.com/user-attachments/assets/98710b48-490f-488e-aa8d-23955a6224e7" />
 
@@ -65,8 +68,8 @@ You can type **Service** into the field and click **Check Names** and the servic
 We can confirm they are in the group by right-clicking on the admin accounts name and selecting **Properties** then clicking the **Member of** tab.
 <img width="1039" height="782" alt="Screenshot from 2025-07-31 17-52-38" src="https://github.com/user-attachments/assets/f67bcec7-14b6-4062-9b15-1ed0ea529dc8" />
 
-
-## Building Role Structure
+<a name="building-access-group-structure"></a>
+## Building Access Group Structure
 So we have defined the Service Desk Admin roles that we assign users to, now we will assign those "Roles" to groups that actually grant access to special permissions. Permissions will be inherited from the Parent Group meaning any group that is assigned to it will inherit permissions from the parent and any user inside of the group will be inheriting permissions from it. Think that permissions are passed down from Parent Group -> Service Desk Role -> Administrative user. Assigning elevated permissions in this fashion greatly reduces the administrative burden of having to assign tens or hundreds of users similar permissions.<br/>
 <img width="512" height="512" alt="ChatGPT Image Jul 31, 2025, 06_03_39 PM" src="https://github.com/user-attachments/assets/12b7ac99-de2f-40ae-98e6-0fb252f9050c" />
 
@@ -90,7 +93,7 @@ Finally, for the **Service_Desk_Admins_Tier_III**, we will be adding all four of
 Now to verify that all of the tiers have been assigned to the correct groups, right-click the tiered group and select **Properties** then click **Member of** to view the groups they are members of.
 <img width="1039" height="782" alt="Screenshot from 2025-08-01 12-00-05" src="https://github.com/user-attachments/assets/2dbb3944-fafa-40e3-9613-14de60e23f6b" />
 
-
+<a name="assigning-access-controls"></a>
 ## Assigning Access Controls
 These groups that we have created for access don't have access just yet. Starting with the **Domain_Admins_Users** group, we will give everyone who inherits rights from it will be able to manage domain users under each site. We will need to what is called **Delegate Control** for every user OU in our Virginia and Maryland sites.
 
@@ -134,7 +137,7 @@ Switching back to the domain controller, we will also grant the **Local_Admins_S
 Click the **Members** tab and click **Add** then add the **Local_Admins_Servers** group
 <img width="1039" height="782" alt="Screenshot from 2025-08-01 13-52-20" src="https://github.com/user-attachments/assets/77ec0deb-5431-435f-8569-26edfddbfe91" />
 
-
+<a name="confirm-admin-permissions-are-configured-correctly"></a>
 ## Confirm Admin Permissions are Configured Correctly
 Now that we have assigned the proper roles and groups to our admin user that we created earlier, now we test it. We will sign into our **SVR-1** vm under the admin user we just created.
 <img width="1052" height="882" alt="Screenshot from 2025-08-01 13-59-28" src="https://github.com/user-attachments/assets/e472f189-7dcc-4809-9557-589d1d24f229" />
@@ -143,7 +146,7 @@ Now that we have assigned the proper roles and groups to our admin user that we 
 Create a local user, search **Computer Management** in the Windows search bar and expand **Local Users and Groups** select **Users** and make a test user. Check **Password never expires** and click **Create**
 <img width="1052" height="882" alt="Screenshot from 2025-08-01 14-04-06" src="https://github.com/user-attachments/assets/31f689db-55f7-4bdb-80fd-2dccb87bc008" />
 
-
+<a name="conclusion"></a>
 ## Conclusion
 By using nested security groups for role assignments, we reduced the need to grant permissions to individual users. Changes to access can now be made by adding/removing users from a single group, improving scalability and reducing administrative errors. This same structure can be extended to manage permissions for file shares, GPO scopes, and Azure AD role assignments.
 
