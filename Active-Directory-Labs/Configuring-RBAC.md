@@ -1,5 +1,7 @@
 # Configuring Role Based Access Control
 
+[Create an Administrator Account](#creating-administrator-account)
+
 Role-Based Access Control (RBAC) is a method for assigning permissions to users based on their role in an organization. Instead of assigning permissions directly to users, permissions are granted to roles (security groups), and users are added to these roles. This allows centralized management, easier audits, and reduced administrative overhead. In this lab, we'll implement RBAC in Active Directory by creating role groups for different Service Desk tiers, nesting them into permission groups, and delegating access at both the domain and local machine levels.
 
 
@@ -25,8 +27,11 @@ The approach that will be taken will be nesting **Role Groups** within **Access 
 See the visual representation below:<br/>
 <img width="640" height="480" alt="Access (3)" src="https://github.com/user-attachments/assets/52c931ab-1e55-49fb-8b52-2d8940a8410d" />
 
+## Tasks
 
-## Creating Administrator Account
+
+<a name="creating-administrator-account"></a>
+## Creating an Administrator Account
 We will select one of the IT users and create an alternate account that will be given administrative permissions. Active Directory prevents you from storing two identical objects in the same OU, so I have a separate OU for user accounts and groups that are given admin privileges. This account will be stored in the **Special Users** OU. Right-click the OU you want to place your admin account highlight **New** and select **User**. 
 <img width="1039" height="782" alt="Screenshot from 2025-07-31 17-15-48" src="https://github.com/user-attachments/assets/30692a7e-5351-45b9-8bc0-26ab09f5e321" />
 
@@ -62,8 +67,8 @@ We can confirm they are in the group by right-clicking on the admin accounts nam
 
 
 ## Building Role Structure
-So we have defined the Service Desk Admin roles that we assign users to, now we will assign those "Roles" to groups that actually grant access to special permissions. Permissions will be inherited from the Parent Group meaning any group that is assigned to it will inherit permissions from the parent and any user inside of the group will be inheriting permissions from it. Think that permissions are passed down from Parent Group -> Service Desk Role -> Administrative user. Assigning elevated permissions in this fashion greatly reduces the administrative burden of having to assign tens or hundreds of users similar permissions.
-<img width="1024" height="1024" alt="ChatGPT Image Jul 31, 2025, 06_03_39 PM" src="https://github.com/user-attachments/assets/12b7ac99-de2f-40ae-98e6-0fb252f9050c" />
+So we have defined the Service Desk Admin roles that we assign users to, now we will assign those "Roles" to groups that actually grant access to special permissions. Permissions will be inherited from the Parent Group meaning any group that is assigned to it will inherit permissions from the parent and any user inside of the group will be inheriting permissions from it. Think that permissions are passed down from Parent Group -> Service Desk Role -> Administrative user. Assigning elevated permissions in this fashion greatly reduces the administrative burden of having to assign tens or hundreds of users similar permissions.<br/>
+<img width="512" height="512" alt="ChatGPT Image Jul 31, 2025, 06_03_39 PM" src="https://github.com/user-attachments/assets/12b7ac99-de2f-40ae-98e6-0fb252f9050c" />
 
 
 We will now create the groups that will contain the elevated rights. They will be named **Local_Admins_Servers**, **Local_Admins_Endpoints**, **Local_Admins_Printers**, **Domain_Admins_Users**. Follow the same steps for creating groups as earlier.
