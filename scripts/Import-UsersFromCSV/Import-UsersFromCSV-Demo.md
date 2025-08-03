@@ -1,6 +1,7 @@
 # Bulk User Creation and Group Assignment
 
-This will be a demonstration of the Import-UsersFromCSV.ps1 script that I wrote. This script will allow you to create a user and assign them to groups based on the data that is imported from a .csv file.
+## Overview
+This will be a demonstration of my Import-UsersFromCSV.ps1 script. This script automates Active Directory user creation from a CSV file. It also assigns users to the correct OUs and security groups based on imported attributes.
 
 ### Importing the CSV file
 Below is the CSV file that will be used to import the list of users and their information from.
