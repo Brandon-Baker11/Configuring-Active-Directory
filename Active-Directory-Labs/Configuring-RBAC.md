@@ -1,10 +1,11 @@
 # Configuring Role Based Access Control
 
-In this lab, we'll implement Role Based Access Controll (RBAC) to demonstrate the assignment of roles to users and groups at scale. Every user in Active Directory (AD) usually has one or more roles. To efficiently assign roles to these users, we make a security group for each one of those roles. Then we add the users into the groups that contain the roles the user needs assigned. We will grant access to make changes at the domain level and at the local level. There will be a separate virtual machine running Windows Server 2022 which we will have administrative permissions granted to make changes to it.
+Role-Based Access Control (RBAC) is a method for assigning permissions to users based on their role in an organization. Instead of assigning permissions directly to users, permissions are granted to roles (security groups), and users are added to these roles. This allows centralized management, easier audits, and reduced administrative overhead. In this lab, we'll implement RBAC in Active Directory by creating role groups for different Service Desk tiers, nesting them into permission groups, and delegating access at both the domain and local machine levels.
+
 
 ## Current AD Organization Structure
-In my AD environment I have a Virginia and Maryland site, several departments within and user accounts are stored within those departments.The IT organizational unit (OU) is based out of the Virginia site and contains all of the IT personel for the organization. We will have three tiers of access for both sites in this lab Users, Servers, and Endpoints. The users are nested within each department OU while the servers and endpoints are nested in the site.
-<img width="1039" height="782" alt="Screenshot from 2025-07-31 13-49-58" src="https://github.com/user-attachments/assets/24f1d848-34ee-4c5a-bad8-10254c5d83dd" />
+In my AD environment I have a Virginia and Maryland site, several departments within and user accounts are stored within those departments.The IT organizational unit (OU) is based out of the Virginia site and contains all of the IT personnel for the organization. We will have three tiers of access for both sites in this lab Users, Servers, and Endpoints. The users are nested within each department OU while the servers and endpoints are nested in the site. <br>
+<img width="640" height="480" alt="Screenshot from 2025-07-31 13-49-58" src="https://github.com/user-attachments/assets/24f1d848-34ee-4c5a-bad8-10254c5d83dd" />
 
 
 ## RBAC Structure
@@ -21,11 +22,8 @@ The approach that will be taken will be nesting **Role Groups** within **Access 
 - Service_Desk_Admins_Tier_II → Domain_Admins_Users, Local_Admins_Endpoints Local_Admins_Printers
 - Service_Desk_Admins_Tier_III → member of all permission groups
 
-See the visual representation below:
-
+See the visual representation below:<br/>
 <img width="640" height="480" alt="Access (3)" src="https://github.com/user-attachments/assets/52c931ab-1e55-49fb-8b52-2d8940a8410d" />
-
-
 
 
 ## Creating Administrator Account
@@ -64,7 +62,7 @@ We can confirm they are in the group by right-clicking on the admin accounts nam
 
 
 ## Building Role Structure
-So we have defined the Service Desk Admin roles that we assign users to, now we will assign those "Roles" to groups that actually grant access to special permissions. Permissions will be inherited from the Parent Group meaning any group that is assigned to it will inherit permissions from the parent and any user inside of the group will be inheriting permissions from it. Think that permssions are passed down from Parent Group -> Service Desk Role -> Administrative user. Assigning elevated permissions in this fashion greatly reduces the administrative burden of having to assign tens or hundreds of users similar permissions.
+So we have defined the Service Desk Admin roles that we assign users to, now we will assign those "Roles" to groups that actually grant access to special permissions. Permissions will be inherited from the Parent Group meaning any group that is assigned to it will inherit permissions from the parent and any user inside of the group will be inheriting permissions from it. Think that permissions are passed down from Parent Group -> Service Desk Role -> Administrative user. Assigning elevated permissions in this fashion greatly reduces the administrative burden of having to assign tens or hundreds of users similar permissions.
 <img width="1024" height="1024" alt="ChatGPT Image Jul 31, 2025, 06_03_39 PM" src="https://github.com/user-attachments/assets/12b7ac99-de2f-40ae-98e6-0fb252f9050c" />
 
 
@@ -128,7 +126,7 @@ Switching back to the domain controller, we will also grant the **Local_Admins_S
 <img width="1039" height="782" alt="Screenshot from 2025-08-01 13-50-57" src="https://github.com/user-attachments/assets/0d6bdc68-a9ef-483b-a580-bea651931037" />
 
 
-Click the **Memers** tab and click **Add** then add the **Local_Admins_Servers** group
+Click the **Members** tab and click **Add** then add the **Local_Admins_Servers** group
 <img width="1039" height="782" alt="Screenshot from 2025-08-01 13-52-20" src="https://github.com/user-attachments/assets/77ec0deb-5431-435f-8569-26edfddbfe91" />
 
 
@@ -142,31 +140,6 @@ Create a local user, search **Computer Management** in the Windows search bar an
 
 
 ## Conclusion
-In this lab we have created an administrative user that is granted permissions to create and modify user accounts, groups, server settings, and printer operations implementing basic RBAC techniques.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+By using nested security groups for role assignments, we reduced the need to grant permissions to individual users. Changes to access can now be made by adding/removing users from a single group, improving scalability and reducing administrative errors. This same structure can be extended to manage permissions for file shares, GPO scopes, and Azure AD role assignments.
 
 
