@@ -76,7 +76,7 @@ Leave **Start the synchronization process when configuration completes** checked
 <img width="1039" height="782" alt="Screenshot from 2025-08-03 22-02-17" src="https://github.com/user-attachments/assets/f86e2b1d-41a1-431b-9e52-9d16fd807753" />
 
 
-<a name="confirm">
+<a name="confirm"></a>
 ## Confirm Object Synchronization
 To confirm that the synchronization was successful, all we need to do is verify that user objects are being populated in our EntraID tenant. In the EntraID admin center, open the **EntraID** blade and select **Users**
 <img width="1039" height="782" alt="Screenshot from 2025-08-03 22-09-44" src="https://github.com/user-attachments/assets/adc3ec44-c8fa-451c-9f76-ca1b81564d02" />
