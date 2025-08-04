@@ -1,3 +1,5 @@
+<img width="618" height="200" alt="microsoft-entra-id-logo-small" src="https://github.com/user-attachments/assets/4488df12-9bc1-4024-8b48-cf6d1d4766c0" />
+
 # Configuring Microsoft Entra Connect
 
 
