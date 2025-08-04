@@ -1,5 +1,13 @@
 # Configuring Microsoft Entra Connect
 
+
+## What is Microsoft Entra Connect?
+Microsoft Entra Connect is a utility that integrates your on-premises Active Directory Domain Services with Microsoft Entra ID (formerly Azure AD), allowing for a hybrid identity environment. This allows you to:
+- Single Sign-On (SSO) for on-prem and cloud applications
+- Secure authentication options such as Password Hash Synchronization and Pass-through Authentication
+- Centralized identity management using one set of credentials across environments
+
+
 ## Overview
 In this lab I will demonstrating the installation and configuration of Microsoft Entra Connect to my Windows Server 2022 virtual machine. Microsoft Entra Connect is a program that allows you to integrate a Microsoft Azure tenant to an already existing Active Directory on-premises environment. With this hybrid environment you get to experience the benefit of single sign on for on-prem and cloud applications, enhanced security through authentication methods like Password Hash Synchronization and Pass-through Authentication, and leveraging a single set of sign in credentials to access on-premises and cloud applications.
 
@@ -12,8 +20,16 @@ In this lab I will demonstrating the installation and configuration of Microsoft
 
 <a name="install"></a>
 ## Installing Entra Connect
-We will start out in our Microsoft Entra Admin Center. You can get there by [clicking here](https://entra.microsoft.com). Once logged in, on the left hand side click the **Microsoft EntraID** icon and scroll down to **Entra Connect**
-> You'll be presented with the options of **Cloud Sync** and **Connect Sync**. While these are both lightweight agents that facilitate the synchronization of cloud and on-premises environments, the difference is that you get more advanced features with Connect Sync. Pass-Through Authentication, syncing of device objects, and Exchange Hybrid writeback are only available in Connect Sync.
+We will start out in our [Microsoft Entra Admin Center](https://entra.microsoft.com). Once logged in, on the left hand side click the **Microsoft EntraID** icon and scroll down to **Entra Connect**. You'll be presented with the options of **Cloud Sync** and **Connect Sync**. Below is a table that shows some of the differences between the two.
+
+| Features                    | Cloud Sync | Connect Sync |
+|-----------------------------|------------|--------------|
+| Lightweight agent           | ✅         | ❌           |
+| Pass-through Authentication | ❌         | ✅           |
+| Device object sync          | ❌         | ✅           |
+| Exchange hybrid writeback   | ❌         | ✅           |
+
+While these are both lightweight agents that facilitate the synchronization of cloud and on-premises environments, Connect Sync comes with more features and is built to support a more complex hybrid identity structure.
 <img width="1039" height="782" alt="Screenshot from 2025-08-03 14-44-26" src="https://github.com/user-attachments/assets/e35f095e-7cd9-4865-87be-f8f6ad08ce3c" />
 
 
@@ -87,6 +103,4 @@ You should now see all of the users  from the selected OUs populating in EntraID
 <img width="1039" height="782" alt="Screenshot from 2025-08-03 22-11-52" src="https://github.com/user-attachments/assets/9ebc185e-0a20-40d9-8a2f-625bd91a506b" />
 
 
-And now we have combined our on-premises Active Directory Domain Services with our Microsoft EntraID tenant.
-
-
+By connecting our Active Directory Domain Services to Microsoft Entra ID, we have established a hybrid identity model that makes user management easier, enhances security, and supports modern authentication for cloud applications. This setup can also be extended to enable SSO, conditional access policies, and integration with Microsoft 365 services.
