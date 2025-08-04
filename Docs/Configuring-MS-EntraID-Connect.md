@@ -8,7 +8,7 @@ Microsoft Entra Connect is a utility that integrates your on-premises Active Dir
 - Centralized identity management using one set of credentials across environments
 
 
-## Overview
+## Lab Overview
 In this lab I will demonstrating the installation and configuration of Microsoft Entra Connect to my Windows Server 2022 virtual machine. Microsoft Entra Connect is a program that allows you to integrate a Microsoft Azure tenant to an already existing Active Directory on-premises environment. With this hybrid environment you get to experience the benefit of single sign on for on-prem and cloud applications, enhanced security through authentication methods like Password Hash Synchronization and Pass-through Authentication, and leveraging a single set of sign in credentials to access on-premises and cloud applications.
 
 ## Tasks
