@@ -23,9 +23,9 @@ Although shared folders offer a simple and straight forward solution for sharing
 
 ### Distributed File System (DFS)
 
-DFS solves many of the issues that shared folders have by allowing 
-DFS is a centralized way of sharing multiple folders and storing much more conveniently. Here are its components that make it possible:
-- **Namespace Server** - This is the server that will host the namespace. This can be either a domain controller or a server that is the member of the domain which in it is configured.
+<img width="1920" height="1080" alt="Namespace Diag" src="https://github.com/user-attachments/assets/f8404cd5-d002-4285-8479-e12561383a37" /></br>
+DFS centralizes sharing multiple folders and storing much more conveniently. Here are the components that make it possible:
+- **Namespace Server** This is the server that will host the namespace. This can be either a domain controller or a server that is the member of the domain which in it is configured.
 - **Namespace Root** - This is the starting point of the namespace. It is a domain based namespace so it is written like</br> **\\\domain_name\root_name**. This namespace root can be hosted on multiple different servers, making it available one server goes offline.
 - **Folder** - Folders are used to make a hierarchical structure within the namespace.
 - **Target Folder** - Target folders are the UNC path to a shared folder or namespace. The folder target is where the data is stored.
@@ -34,8 +34,7 @@ As you can see, DFS solves a lot of the issues that shared folders had by improv
 
 ## Tasks
 - [Creating the Initial Folder](#initial)
-- Assigning Share Permissions
-- Assigning NTFS Permissions
+- [Assigning Share and NTFS Permissions](#permissions)
 - Confirming Share Configuration
 - Install DFS Namespace Server Utility
 - Create DFS Namespace
@@ -51,8 +50,26 @@ Go inside of that folder and create another folder following the same instructio
 <img width="1042" height="792" alt="Screenshot from 2025-08-07 18-26-23" src="https://github.com/user-attachments/assets/24d1be6b-d700-4dfc-8bc9-35659bb5e2da" />
 
 
+<a name="permissions"></a>
+## Assigning Share and NTFS Permissions
 Go up one layer back to the C:\\ drive. Right click on the **Public Share** folder and select **Properties**.
 <img width="1042" height="792" alt="Screenshot from 2025-08-07 18-35-10" src="https://github.com/user-attachments/assets/41cfc552-d3a2-495a-99de-5ddbac864185" />
+
+
+Select the **Sharing** tab and select **Advanced Sharing...**
+<img width="1042" height="792" alt="Screenshot from 2025-08-08 15-12-38" src="https://github.com/user-attachments/assets/f63b8564-caed-4357-9d71-630fa8ba034f" />
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
