@@ -36,8 +36,8 @@ As you can see, DFS solves a lot of the issues that shared folders had by improv
 - [Creating the Initial Folder](#initial)
 - [Assigning Share and NTFS Permissions](#permissions)
 - [Confirming Share Configuration](#confirm)
-- Install DFS Namespace Server Utility
-- Create DFS Namespace
+- [Install DFS Namespace Server Role](#install-namespace)
+- [Create DFS Namespace](#create-namespace)
 
 
 <a name="initial"></a>
@@ -100,6 +100,106 @@ As you can see, the user I'm logged in as isn't able to access the folder **IT**
 
 
 Now we will test with a user that is a member of the **IT_Users** group.
+<img width="1051" height="881" alt="Screenshot from 2025-08-09 10-49-02" src="https://github.com/user-attachments/assets/fed60329-cfd1-4e09-8848-cdc7051b96c7" />
+
+
+And now we confirmed that a member of the **IT_Users** group can access the folder.
+<img width="1057" height="888" alt="Screenshot from 2025-08-09 10-55-28" src="https://github.com/user-attachments/assets/bbac2d18-f817-4081-8bc7-5ad6b7ff306e" />
+
+
+<a name="install-namespace"></a>
+## Install DFS Namespace Server Role
+Next we will be configuring **SVR-1** to host namespace. Open the **Server Manager** dashboard select **Add roles and features**
+<img width="1051" height="881" alt="Screenshot from 2025-08-09 11-08-54" src="https://github.com/user-attachments/assets/90e08b95-9372-4013-bc4c-e86d54b9d89c" />
+
+
+Click **Next** twice and on the **Server Selection** section, ensure the correct server is highlighted. Click **Next**
+<img width="1051" height="881" alt="Screenshot from 2025-08-09 11-12-07" src="https://github.com/user-attachments/assets/8520d5a7-91ab-4339-94c3-73bb9fa79b04" />
+
+
+On the **Server Roles** section, expand **File and Storage Services** then expand **File and iSCSI Services**. Check the box next to **DFS Namespaces** and select **Add Features** in the pop-up window.
+<img width="1051" height="881" alt="Screenshot from 2025-08-09 11-14-45" src="https://github.com/user-attachments/assets/69859594-1d91-4a81-909a-6c831368b9e0" />
+
+
+Click **Next** twice then click **Install**.
+> This can take several minutes to install
+<img width="1051" height="881" alt="Screenshot from 2025-08-09 11-16-41" src="https://github.com/user-attachments/assets/e0e533e9-2490-4bb3-8054-2f5b4014cff6" />
+
+
+<a name="create-namespace"></a>
+Once the install is complete, on the **Server Manager** dashboard, click **Tools** and select **DFS Management**
+<img width="1051" height="881" alt="Screenshot from 2025-08-09 11-25-15" src="https://github.com/user-attachments/assets/d55a167a-2b3a-49f7-9f58-3f8b287dde47" />
+
+
+Right-click **Namespace** and select **New Namespace...**
+<img width="1051" height="881" alt="Screenshot from 2025-08-09 12-07-24" src="https://github.com/user-attachments/assets/9193d758-1663-4e0b-9f23-daa4115acfa7" />
+
+
+Next specify the name of the server that will host the namespace, in my case it will be **SVR-1**. Click **Next**
+<img width="1051" height="881" alt="Screenshot from 2025-08-09 12-12-54" src="https://github.com/user-attachments/assets/ed078162-aa86-4927-96f3-c6dc263b55de" />
+
+
+Next specify the name of the DFS folder. Name it **dfs**. Click **Next**
+<img width="1051" height="881" alt="Screenshot from 2025-08-09 12-13-56" src="https://github.com/user-attachments/assets/152df016-0e57-444b-b3af-9799609d9a6b" />
+
+
+We will leave this as a domain namespace, click **Next**
+<img width="1051" height="881" alt="Screenshot from 2025-08-09 12-15-23" src="https://github.com/user-attachments/assets/24ef5f2c-29bb-4a4c-9b68-4fd404006025" />
+
+
+Take a second to review the configuration for the DFS folder and click **Create** when finished.
+<img width="1051" height="881" alt="Screenshot from 2025-08-09 12-16-53" src="https://github.com/user-attachments/assets/912b1bc2-1084-4739-8040-6fb5818b23c4" />
+
+
+Once complete you should get the following message:
+<img width="1051" height="881" alt="Screenshot from 2025-08-09 12-19-41" src="https://github.com/user-attachments/assets/d94e628a-7878-49e8-ad64-f5ac1f1e3177" />
+
+
+Now expand **Namespaces** and you should see the domain namespace that we just created. Right-click it and select **New Folder...**
+<img width="1051" height="881" alt="Screenshot from 2025-08-09 12-21-35" src="https://github.com/user-attachments/assets/30ca883e-1160-4c42-9189-c9df46318af6" />
+
+
+Name the folder **IT** same as the shared folder we created earlier.
+<img width="1051" height="881" alt="Screenshot from 2025-08-09 12-37-08" src="https://github.com/user-attachments/assets/efbe6fc5-d612-4b4d-a4d8-993d5ef563a7" />
+
+
+Next, we will add a target folder. Click **Add** under the **Target Folder** field. Click **Browse** and go to navigate to where the shared folder is stored. Click **Ok** once you have the share selected.
+<img width="1051" height="881" alt="Screenshot from 2025-08-09 12-39-29" src="https://github.com/user-attachments/assets/0e331a79-0ff2-43f4-8563-c45db5bf9e1b" />
+
+
+Now the **IT** folder has successfully been linked to the DFS namespace. You should see the folder appear in the **DFS Manager** and in the file explorer when you go to the location **\\C:\\DFSRoots\\dfs**
+<img width="1079" height="907" alt="Screenshot from 2025-08-09 12-45-57" src="https://github.com/user-attachments/assets/8d3d032a-6253-4db0-984b-7883191394b1" />
+
+
+Ok, let's log back into the client machine as a user that is a member of the IT_Users security group and map ourselves to the dfs folder. Enter the path to the dfs folder and click **Finish**
+<img width="1051" height="881" alt="Screenshot from 2025-08-09 12-55-36" src="https://github.com/user-attachments/assets/0c7591a5-dc78-494d-802f-f8e71213303b" />
+
+
+You should now see that the drive has been successfully mapped.
+<img width="1051" height="881" alt="Screenshot from 2025-08-09 12-57-30" src="https://github.com/user-attachments/assets/f907d6aa-379d-4cc7-a418-8fb9794987b5" />
+
+
+## Conclusion
+In this lab we discussed the possible ways to share data in an Active Directory environment using shared folders and DFS. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
