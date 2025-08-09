@@ -35,7 +35,7 @@ As you can see, DFS solves a lot of the issues that shared folders had by improv
 ## Tasks
 - [Creating the Initial Folder](#initial)
 - [Assigning Share and NTFS Permissions](#permissions)
-- Confirming Share Configuration
+- [Confirming Share Configuration](#confirm)
 - Install DFS Namespace Server Utility
 - Create DFS Namespace
 
@@ -60,21 +60,46 @@ Select the **Sharing** tab and select **Advanced Sharing...**
 <img width="1042" height="792" alt="Screenshot from 2025-08-08 15-12-38" src="https://github.com/user-attachments/assets/f63b8564-caed-4357-9d71-630fa8ba034f" />
 
 
+Check the box next to **Share this folder** and click on the box that says **Permissions**.
+<img width="1042" height="792" alt="Screenshot from 2025-08-08 17-41-45" src="https://github.com/user-attachments/assets/6dcc0b1f-9ee1-41fa-9a8f-97d27495cfe6" />
 
 
+In this window we will assign the **Share** permissions for this folder. For the **Share** we will allow **Everyone** full control, click **Apply**, and click **Apply** on the **Advanced sharing**. Later on when we assign NTFS permissions we will be stricter on access. Assigning permissions in this fashion makes access management more effective since NTFS can be more granular when assigning permissions and offers permissions inheritability. This means that a user will have access to a sub-folder based on the parent folders access.
+<img width="1042" height="792" alt="Screenshot from 2025-08-08 17-51-20" src="https://github.com/user-attachments/assets/6941721c-5dcf-457a-a75c-92bcf9539f26" />
 
 
+Now click the **Security** tab while in the share's properties window. Here is where we will be assigning the **NTFS** permissions by security group. Click **Edit** then **Add**. I will be allowing the each department in my AD environment access (Read & Execute) to this folder and have the **Service_Desk_Tier_III** members access to manage it (Full Access). 
+<img width="1042" height="792" alt="Screenshot from 2025-08-08 18-33-04" src="https://github.com/user-attachments/assets/f8f84978-481a-46bc-9825-942da77514fb" />
 
 
+We will follow the same steps to assign the share and NTFS permissions as above. 
+<img width="1042" height="792" alt="Screenshot from 2025-08-08 18-38-49" src="https://github.com/user-attachments/assets/9a7b7de9-4b72-463c-9957-3799c2d53790" />
 
 
+Next we will disable inheritability in the **IT** folder and remove unnecessary users/groups. The tier III security group will still be given full access. While in the **Security** tab, select **Advanced**
+<img width="1042" height="792" alt="Screenshot from 2025-08-08 23-07-17" src="https://github.com/user-attachments/assets/90093b1a-452d-4f66-9adc-73c69c9dd8c2" />
 
 
+Click **Disable Inheritance** and select the option **Convert inherited permissions into explicit permissions on this object**. After that selection, you should see **None** under the **Inherited from** column. Remove all unnecessary users/groups.
+<img width="1042" height="792" alt="Screenshot from 2025-08-08 23-27-33" src="https://github.com/user-attachments/assets/4435e119-1c4e-4a28-b9ad-1fb128ae2601" />
 
 
+<a name="confirm"></a>
+## Confirm Share Folder Configuration
+To confirm that the permissions are working correctly, I'll sign into a user outside of the IT_Users group and attempt to access the **IT** folder.
+<img width="1071" height="902" alt="Screenshot from 2025-08-09 00-04-41" src="https://github.com/user-attachments/assets/867afe21-bd36-408a-aea0-d2af1774cea7" />
 
 
+First I'll map the network share as a drive on my client virtual machine **CLIENT_1**.
+<img width="1071" height="902" alt="Screenshot from 2025-08-08 23-37-34" src="https://github.com/user-attachments/assets/4ae0e697-23b3-46c7-8c1a-3910f25e9a08" />
 
+
+As you can see, the user I'm logged in as isn't able to access the folder **IT** since they don't have the permission to.
+> If you can still access the folder from outside, be sure to check for groups like *users* *authenticated users* or *everyone* to still be listed in the permissions tab.
+<img width="1071" height="902" alt="Screenshot from 2025-08-09 00-18-47" src="https://github.com/user-attachments/assets/898e8f56-79cc-487b-a158-b21aa6e11ac2" />
+
+
+Now we will test with a user that is a member of the **IT_Users** group.
 
 
 
