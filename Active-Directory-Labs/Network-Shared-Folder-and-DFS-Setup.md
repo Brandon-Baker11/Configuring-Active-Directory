@@ -11,7 +11,7 @@ Both of these methods allow you to interact with folders from a remote file serv
 
 ### Network Shared Folders
 
-Network shared folders are very straight forward  you share a folder that is hosted on a file server to other devices on it's network.
+Network shared folders are straightforward, you share a folder hosted on a file server so it can be accessed by other devices on the network..
 - It Provides users with access to files and folders over the network.
 - Easy to set up and manage, ideal for small to medium-sized networks.
 - Users connect directly to the server hosting the shared folder.
@@ -76,7 +76,7 @@ We will follow the same steps to assign the share and NTFS permissions as above.
 <img width="1042" height="792" alt="Screenshot from 2025-08-08 18-38-49" src="https://github.com/user-attachments/assets/9a7b7de9-4b72-463c-9957-3799c2d53790" />
 
 
-Next we will disable inheritability in the **IT** folder and remove unnecessary users/groups. The tier III security group will still be given full access. While in the **Security** tab, select **Advanced**
+Next we will disable inheritance in the **IT** folder and remove unnecessary users/groups. The tier III security group will still be given full access. While in the **Security** tab, select **Advanced**
 <img width="1042" height="792" alt="Screenshot from 2025-08-08 23-07-17" src="https://github.com/user-attachments/assets/90093b1a-452d-4f66-9adc-73c69c9dd8c2" />
 
 
@@ -109,7 +109,7 @@ And now we confirmed that a member of the **IT_Users** group can access the fold
 
 <a name="install-namespace"></a>
 ## Install DFS Namespace Server Role
-Next we will be configuring **SVR-1** to host namespace. Open the **Server Manager** dashboard select **Add roles and features**
+At this point, we have a shared folder for IT. Now we’ll create a DFS namespace hosted on SVR-1 that points to this share.Next we will be configuring **SVR-1** to host namespace. Open the **Server Manager** dashboard select **Add roles and features**
 <img width="1051" height="881" alt="Screenshot from 2025-08-09 11-08-54" src="https://github.com/user-attachments/assets/90e08b95-9372-4013-bc4c-e86d54b9d89c" />
 
 
@@ -167,7 +167,8 @@ Next, we will add a target folder. Click **Add** under the **Target Folder** fie
 <img width="1051" height="881" alt="Screenshot from 2025-08-09 12-39-29" src="https://github.com/user-attachments/assets/0e331a79-0ff2-43f4-8563-c45db5bf9e1b" />
 
 
-Now the **IT** folder has successfully been linked to the DFS namespace. You should see the folder appear in the **DFS Manager** and in the file explorer when you go to the location **\\C:\\DFSRoots\\dfs**
+Now the **IT** folder has successfully been linked to the DFS namespace. You should see the folder appear in the **DFS Manager**. You can also confirm in the file explorer when you go to the location **\\C:\\DFSRoots\\dfs**
+> This is the location that is local to the hosting DFS server. When referencing the DFS folder, use the UNC path \\\\domain\\dfs instead
 <img width="1079" height="907" alt="Screenshot from 2025-08-09 12-45-57" src="https://github.com/user-attachments/assets/8d3d032a-6253-4db0-984b-7883191394b1" />
 
 
@@ -179,30 +180,15 @@ You should now see that the drive has been successfully mapped.
 <img width="1051" height="881" alt="Screenshot from 2025-08-09 12-57-30" src="https://github.com/user-attachments/assets/f907d6aa-379d-4cc7-a418-8fb9794987b5" />
 
 
+## Key Takeaways
+- Use NTFS for granular access control; keep share permissions broad.
+- DFS namespaces simplify access paths and improve availability.
+- Test with multiple user roles to ensure permissions behave as intended.
+- Always check **Effective Access** to troubleshoot unexpected folder access
+
+
 ## Conclusion
 In this lab we discussed the possible ways to share data in an Active Directory environment using shared folders and DFS. 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
