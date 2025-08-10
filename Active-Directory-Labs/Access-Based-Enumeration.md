@@ -16,6 +16,7 @@ It simplifies the user's experience by hiding shared network folders they don't 
 - [Enable ABE for Network Shared Folders](#shared-folder)
 - [Confirm ABE Configuration on Shared Folder](#confirm-shared)
 - [Enable ABE for DFS Folders](#dfs)
+- [Set DFS Access Permissions](#permissions)
 - [Confirm ABE DFS Configuration on DFS Folder](#confirm-dfs)
 
 
@@ -61,18 +62,24 @@ Click the **Advanced** tab in the **Properties** window and check the box next t
 <img width="1059" height="898" alt="Screenshot from 2025-08-10 13-38-53" src="https://github.com/user-attachments/assets/43882988-b52e-4f89-aee8-16b83db0e12c" />
 
 
+<a name="permissions"></a>
+## Set DFS Access Permissions
+Now we will set explicit access permissions for each of the target folders within the DFS namespace. These permissions that we set here will have no impact on NTFS permissions for the actual share that the DFS target folders point to, only the target folder links themselves.
+
+Right-click a target folder in your DFS namespace and select **Properties**
+<img width="1059" height="898" alt="Screenshot from 2025-08-10 14-12-38" src="https://github.com/user-attachments/assets/8af7a55e-4c77-4b79-8a47-b553e26290c7" />
 
 
+Click the **Advanced** tab to and fill in the bubble next to **Set explicit view permissions on the DFS folder** and click **Configure view permissions**
+<img width="1059" height="898" alt="Screenshot from 2025-08-10 14-18-09" src="https://github.com/user-attachments/assets/efe8167c-e345-49c9-a387-e61d6aa4878a" />
 
 
+Add the security group that grant access the target folder. Click **Apply**. Follow the same steps for any other folders within the DFS namespace.
+<img width="1059" height="898" alt="Screenshot from 2025-08-10 14-23-56" src="https://github.com/user-attachments/assets/42c97a76-fe76-42a5-ae19-718f4afaff4b" />
 
 
-
-
-
-
-
-
+Now I'll log back into my client as a user that only has access to the **IT** folder. That should be the only folder that is visible after enabling ABE.
+<img width="1072" height="898" alt="Screenshot from 2025-08-10 14-36-05" src="https://github.com/user-attachments/assets/94b80078-3d63-4837-a081-b83835429ee5" />
 
 
 
