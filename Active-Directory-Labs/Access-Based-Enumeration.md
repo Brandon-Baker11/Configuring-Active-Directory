@@ -9,7 +9,7 @@ This lab will cover implementing a security feature offered in Windows that is c
 It simplifies the user's experience by hiding shared network folders they don't have permissions to view. This makes it so only the folders and files they are authorized to interact with appear when browsing a shared network folder. ABE filters folders and files based on NTFS permissions that users/groups have. If they don't at least have **Read** permissions, the folder will not be displayed to them. Here are some benefits of implementing ABE in a production environment:
 - ABE keeps sensitive data from being accessed from unauthorized users by limiting visibility.
 - Users have a simpler interface when interacting with shared network folders.
-- ABE can reduce the "noise" in complex folder structures by hiding irrelivant folders.
+- ABE can reduce the "noise" in complex folder structures by hiding irrelevant folders.
 
 
 ## Tasks
@@ -26,7 +26,7 @@ I am currently logged in as a user on my client machine. This user only has acce
 <img width="1072" height="898" alt="Screenshot from 2025-08-10 12-50-47" src="https://github.com/user-attachments/assets/c1799cff-e60e-4ad8-b306-7f1dc7b74019" />
 
 <a name="enable-abe-server-man"></a>
-To make things a bit cleaner we will enable Access Based Enumeration on the shared folder. Open the **Server Manager** and select **File and Sorage Services**
+To make things a bit cleaner we will enable Access-Based Enumeration on the shared folder. Open the **Server Manager** and select **File and Storage Services**
 <img width="1042" height="792" alt="Screenshot from 2025-08-10 12-55-08" src="https://github.com/user-attachments/assets/0cb8a1e8-eed0-4dc2-b2e5-56fe7f21fa47" />
 
 
@@ -40,7 +40,7 @@ Click **Settings** and check the box **Enable access-based enumeration**. Click 
 
 <a name="confirm-shared"></a>
 ## Confirm ABE Configuration on Shared Folder
-Going back to the client machine. To verify that the ABE was setup properly, you need to log out and log back in for the changes to take place. Once logged back in, open **File Explorer** and go to the share that ABE was enabled on. You should now only see the folders which the user has access to, in this case, this user only has access to the **IT** folder.
+Going back to the client machine. To verify that the ABE was setup properly, you need to sign out and sign back in for the changes to take place. Once logged back in, open **File Explorer** and go to the share that ABE was enabled on. You should now only see the folders which the user has access to, in this case, this user only has access to the **IT** folder.
 <img width="1072" height="898" alt="Screenshot from 2025-08-10 13-16-18" src="https://github.com/user-attachments/assets/a1b7692f-4541-49ef-9aba-55dd150d26da" />
 
 
@@ -70,15 +70,15 @@ Right-click a target folder in your DFS namespace and select **Properties**
 <img width="1059" height="898" alt="Screenshot from 2025-08-10 14-12-38" src="https://github.com/user-attachments/assets/8af7a55e-4c77-4b79-8a47-b553e26290c7" />
 
 
-Click the **Advanced** tab to and fill in the bubble next to **Set explicit view permissions on the DFS folder** and click **Configure view permissions**
+Click the **Advanced** tab and fill in the bubble next to **Set explicit view permissions on the DFS folder** and click **Configure view permissions**
 <img width="1059" height="898" alt="Screenshot from 2025-08-10 14-18-09" src="https://github.com/user-attachments/assets/efe8167c-e345-49c9-a387-e61d6aa4878a" />
 
 
-Add the security group that grant access the target folder. Click **Apply**. Follow the same steps for any other folders within the DFS namespace.
+Add the security group that will grant access the target folder. Click **Apply**. Follow the same steps for any other folders within the DFS namespace.
 <img width="1059" height="898" alt="Screenshot from 2025-08-10 14-23-56" src="https://github.com/user-attachments/assets/42c97a76-fe76-42a5-ae19-718f4afaff4b" />
 
 
-Now I'll log back into my client as a user that only has access to the **IT** folder. That should be the only folder that is visible after enabling ABE.
+Now I'll sign back into my client as a user that only has access to the **IT** folder. That should be the only folder that is visible after enabling ABE.
 <img width="1072" height="898" alt="Screenshot from 2025-08-10 14-36-05" src="https://github.com/user-attachments/assets/94b80078-3d63-4837-a081-b83835429ee5" />
 
 
