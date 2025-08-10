@@ -78,7 +78,7 @@ Add the security group that will grant access the target folder. Click **Apply**
 <img width="1059" height="898" alt="Screenshot from 2025-08-10 14-23-56" src="https://github.com/user-attachments/assets/42c97a76-fe76-42a5-ae19-718f4afaff4b" />
 
 
-<a name="confirm-dfs">
+<a name="confirm-dfs"></a>
 ## Confirm ABE DFS Configuration on DFS Folder
 Now I'll sign back into my client as a user that only has access to the **IT** folder. That should be the only folder that is visible after enabling ABE.
 <img width="1072" height="898" alt="Screenshot from 2025-08-10 14-36-05" src="https://github.com/user-attachments/assets/94b80078-3d63-4837-a081-b83835429ee5" />
