@@ -137,6 +137,28 @@ Now we have conpleted the initial configuration of WSUS. There aren't any machin
 
 <a name="group-policy"></a>
 ## Configuring Group Policy
+From my domain controller I will be establishing the policy that will make all client computers look to the WSUS server for updates. In the Server Manager dashboard, click **Tools** at the top right and select **Group Policy Management**
+<img width="1042" height="792" alt="Screenshot from 2025-08-26 18-05-18" src="https://github.com/user-attachments/assets/e0f9f625-4db4-444f-a8d9-9d52d0825494" />
+
+
+Once the Group Policy Management utility opens you are able to see all of the OUs and the group policy objects (GPOs) associated to each respectively. Since this is a lab environment, everything is utilizing the **Default Domain Policy**. We will be creating a new GPO. Right-click on the folder labeled **Group Policy Objects** and select **New**.
+<img width="1042" height="792" alt="Screenshot from 2025-08-26 18-13-46" src="https://github.com/user-attachments/assets/35ddb5de-d0fb-4736-8488-5144e2e38437" />
+
+
+We'll name this **WSUS Policy**. Click **Ok**. The WSUS Policy GPO should appear under the **Group Policy Objects** folder. Right-click the WSUS GPO and select **Edit**
+<img width="1042" height="792" alt="Screenshot from 2025-08-26 18-20-17" src="https://github.com/user-attachments/assets/8b2d44a2-3755-42ab-8fce-c024df125f20" />
+
+
+On the **Group Policy Management Editor** expand **Policies** -> **Administrative Templates: Policy Definitions** -> **Windows Components**. Highlight **Windows Update** and you will be able to see the policies associated with Windows Update
+
+
+
+
+
+
+
+
+
 
 
 
