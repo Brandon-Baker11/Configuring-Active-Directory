@@ -153,47 +153,55 @@ On the **Group Policy Management Editor** expand **Policies** -> **Administrativ
 <img width="1042" height="792" alt="Screenshot from 2025-08-26 22-39-49" src="https://github.com/user-attachments/assets/6f806bc6-5a3b-46bd-a043-42512794d368" />
 
 
-Search the list of items for **Specify intranet Microsoft update service location** and select it. In the Specify intranet Microsoft update service location policy window click **Enabled**. In the **Set intranet update service for detecting updates:** field enter http://<\your server name>\:8530. Copy/paste that value into the second field as well. Keep default settings for the other options.
-<img width="1042" height="792" alt="Screenshot from 2025-08-26 23-01-05" src="https://github.com/user-attachments/assets/cb79ed52-3e84-4911-9083-75e42ccf33c5" />
+Search the list of items for **Specify intranet Microsoft update service location** and select it. In the Specify intranet Microsoft update service location policy window click **Enabled**. In the **Set intranet update service for detecting updates:** field enter http://<\your server name>\:8530. Copy/paste that value into the second field as well. Keep default settings for the other options. Click **Apply**, then click **Ok**
+<img width="1042" height="792" alt="Screenshot from 2025-08-27 12-54-57" src="https://github.com/user-attachments/assets/9bec1b8d-7a7b-47c2-8d3b-9504f34ee54b" />
 
 
-In the previous step we specified a server to host Microsoft updates from. The server will also get statistics uploaded to it from machines that are updated. We also set the port for the server to connect to the client machines to be 8530. This port is the main one used for WSUS updates. In a production environment you should expect to transfer this data over HTTPS instead of HTTP. In that case, the port would be 8531. 
+In the previous step we specified a server that client machines will download their updates from. The server will also get compliance statistics uploaded to it from those client machines. We also set the WSUS server to listen on port 8530 for HTTP traffic from client machines. This is the default port for WSUS updates over HTTP. In a production environment it is best practice to transmit this data over HTTPS instead of HTTP and set the port to 8531.
 
 
+Next, search for the policy **Configure Automatic Updates**. Here we will configure when client machines will check in with the WSUS server for any available updates. Click **Enabled**. Ensure that **Auto download and notify for install** is selected in the drop down menu. Schedule the install day for **Every day** at **3:00**. The rest of the settings can be kept as default. Click **Apply** then **Ok**.
+<img width="1042" height="792" alt="Screenshot from 2025-08-27 14-22-48" src="https://github.com/user-attachments/assets/9a78b427-a858-4983-8738-bf09cd62649d" />
 
 
+As you can see, I have an OU containing the clients and servers that are in my organization. Since I want this policy to apply to the clients, this it will be linked to the **Clients** OU that I created.
+<img width="1042" height="792" alt="Screenshot from 2025-08-27 14-51-41" src="https://github.com/user-attachments/assets/4fb2f5a1-6199-4ed2-8c97-8437a8bc19ee" />
 
 
+Going back to the Group Policy Mangagement window, I will be linking the OU that I want this policy to apply to. Right-click the OU you wish to apply the policy to, in my case it is the **Clients** OU and select **Link an Existing GPO...** 
+<img width="1042" height="792" alt="Screenshot from 2025-08-27 14-55-20" src="https://github.com/user-attachments/assets/385d0efb-9358-4a14-8253-771d440a3227" />
 
 
+Select the **WSUS Policy** GPO we just made and click **Ok**.
+<img width="1042" height="792" alt="Screenshot from 2025-08-27 17-26-30" src="https://github.com/user-attachments/assets/65d57cc2-b75c-4338-aef0-4b078cd66cf2" />
 
 
+You should now see the policy appear under the OU it was assigned to.
+<img width="1042" height="792" alt="Screenshot from 2025-08-27 17-27-06" src="https://github.com/user-attachments/assets/b45c7263-f87f-40ad-afb8-ac9fe3d51d33" />
 
 
+To verify that the policy was set into place I will sign into my CLIENT-1 vm. Open a command prompt window by clicking the Windows Start charm in the task bar and type **cmd**. Once open, run the command `gpupdate /force` and this will force the system to update its group policies, to include the policy we just put in place.
+<img width="1052" height="882" alt="Screenshot from 2025-08-27 17-48-13" src="https://github.com/user-attachments/assets/2fb93172-73ac-42ce-99ac-b6db6c86279a" />
 
 
+Now to confirm the policies have been applied click the Windows start charm and select **Settings**
+<img width="1052" height="882" alt="Screenshot from 2025-08-27 17-53-55" src="https://github.com/user-attachments/assets/faf8aba5-162b-4991-9c06-7320f204ca51" />
 
 
+Scroll down the list of items on the left hand side and select **Windows Update**
+<img width="1052" height="882" alt="Screenshot from 2025-08-27 17-56-08" src="https://github.com/user-attachments/assets/592ea50f-adb7-4780-9e63-bd2d60ee653e" />
 
 
+Click **Advanced Options**
+<img width="1052" height="882" alt="Screenshot from 2025-08-27 17-57-43" src="https://github.com/user-attachments/assets/10c0a5bc-8bba-411a-9cf8-9381b742d3c8" />
 
 
+Scroll down and select **Configured Update Policies**
+<img width="1052" height="882" alt="Screenshot from 2025-08-27 17-59-57" src="https://github.com/user-attachments/assets/991ae584-4ae6-4c53-bb92-e92ef3437432" />
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+You should now see the GPOs that we assigned to the WSUS policy from earlier.
+<img width="1052" height="882" alt="Screenshot from 2025-08-27 18-01-13" src="https://github.com/user-attachments/assets/bd8a5d55-c40b-4624-a416-d61c617ac7f0" />
 
 
 
