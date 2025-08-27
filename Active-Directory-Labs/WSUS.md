@@ -150,14 +150,14 @@ We'll name this **WSUS Policy**. Click **Ok**. The WSUS Policy GPO should appear
 
 
 On the **Group Policy Management Editor** expand **Policies** -> **Administrative Templates: Policy Definitions** -> **Windows Components**. Highlight **Windows Update** and you will be able to see the policies associated with Windows Update
+<img width="1042" height="792" alt="Screenshot from 2025-08-26 22-39-49" src="https://github.com/user-attachments/assets/6f806bc6-5a3b-46bd-a043-42512794d368" />
 
 
+Search the list of items for **Specify intranet Microsoft update service location** and select it. In the Specify intranet Microsoft update service location policy window click **Enabled**. In the **Set intranet update service for detecting updates:** field enter http://<\your server name>\:8530. Copy/paste that value into the second field as well. Keep default settings for the other options.
+<img width="1042" height="792" alt="Screenshot from 2025-08-26 23-01-05" src="https://github.com/user-attachments/assets/cb79ed52-3e84-4911-9083-75e42ccf33c5" />
 
 
-
-
-
-
+In the previous step we specified a server to host Microsoft updates from. The server will also get statistics uploaded to it from machines that are updated. We also set the port for the server to connect to the client machines to be 8530. This port is the main one used for WSUS updates. In a production environment you should expect to transfer this data over HTTPS instead of HTTP. In that case, the port would be 8531. 
 
 
 
