@@ -4,7 +4,7 @@
 In this lab we will explore some of the features that Windows Server Update Service (WSUS) has to offer. This includes the types of updates, how these updates are deployed to client devices, and the group of devices that will receive the update.
 
 ## What is WSUS?
-The **Windows Server Update Service (WSUS)** is a service that fetches updates for Microsoft operating systems and software. Microsoft Update is the source of these updates that are pushed to clients within the Active Directory environment. This process of a WSUS server getting these updates from Microsoft Update is called **Syncronization**.
+The **Windows Server Update Service (WSUS)** is a service that collects updates for Microsoft operating systems and software from Microsoft Update (synchronization). The servers and clients reach out to the WSUS server to check for any pending updates and the approved updates are distributed to those machines.
 
 ### WSUS Structure
 <p>
@@ -12,7 +12,7 @@ A single server or multiple servers can be designated as a <strong>WSUS server</
 </p>
 
 <p>
-Then you have the <strong>Downstream Servers</strong>, these are configured to receive updates from the upstream server instead of from Microsoft Update. Organizing WSUS in this fashion greatly reduces the bandwidth usage since updates are only downloaded a once by the upstream server and distributed internally to the downstream servers. Downstream servers can be placed within network segments to distribute updates to client computers.
+Then you have the <strong>Downstream Servers</strong>, these are configured to receive updates from the upstream server instead of from Microsoft Update. Organizing WSUS in this fashion greatly reduces the bandwidth usage since updates are only downloaded once by the upstream server and distributed internally to the downstream servers. Downstream servers can be placed within network segments to distribute updates to client computers.
 </p>
 
 ### Downstream Server Modes
@@ -37,7 +37,7 @@ I am signed into an admin account on the server that I plan on hosting the WSUS 
 <img width="1063" height="889" alt="Screenshot from 2025-08-22 15-43-47" src="https://github.com/user-attachments/assets/e699e646-58a0-419c-908e-766d5e10bee2" />
 
 
-Fromt the Server Manager dashboard, select **Add roles and features**
+From the Server Manager dashboard, select **Add roles and features**
 <img width="1063" height="889" alt="Screenshot from 2025-08-22 15-47-39" src="https://github.com/user-attachments/assets/f1905931-8191-4136-9922-2e36800f59e7" />
 
 
@@ -49,7 +49,7 @@ On the **Server Roles** section, scroll to the bottom and select **Windows Serve
 <img width="1063" height="889" alt="Screenshot from 2025-08-22 15-52-29" src="https://github.com/user-attachments/assets/8c7e2c22-6be1-4264-82f4-0007e96e2ad7" />
 
 
-Then click **Next** until you arrive ate the **Content** section of the wizard. Here, the wizard is asking for a location to store the updates that will be downloaded from Microsoft Update. Provide a valid local path. I have a secondary drive with a folder labeled **WSUS**. This is the location where I will store updates. Click **Next**
+Then click **Next** until you arrive at the **Content** section of the wizard. Here, the wizard is asking for a location to store the updates that will be downloaded from Microsoft Update. Provide a valid local path. I have a secondary drive with a folder labeled **WSUS**. This is the location where I will store updates. Click **Next**
 <img width="1063" height="889" alt="Screenshot from 2025-08-22 16-01-48" src="https://github.com/user-attachments/assets/23f7ab87-4d78-462b-8287-3cd37f4545c8" />
 
 
@@ -118,7 +118,7 @@ For the Sync Schedule we will set it to **Synchronize automatically twice** a da
 <img width="1052" height="891" alt="Screenshot from 2025-08-24 14-21-41" src="https://github.com/user-attachments/assets/a89c0cd3-52ea-4398-a8d1-6bfeb17cf5a7" />
 
 
-Check the box **Begin initial sychronization. Click **Next**
+Check the box **Begin initial sychronization**. Click **Next**
 <img width="1052" height="891" alt="Screenshot from 2025-08-24 14-23-57" src="https://github.com/user-attachments/assets/d8904b4e-e3fe-44dd-9916-b682e161b7bb" />
 
 
@@ -134,7 +134,7 @@ If you click on the name of the server, you will be brought to a dashboard that 
 <img width="1052" height="891" alt="Screenshot from 2025-08-24 14-37-45" src="https://github.com/user-attachments/assets/ad801302-9783-491d-b34f-a3c4da9a5392" />
 
 
-Now we have conpleted the initial configuration of WSUS. There aren't any machines configured to reach out to the WSUS server just yet. Group policy will be used to tell the machine to contact the WSUS server so it can issue these updates.
+Now we have completed the initial configuration of WSUS. There aren't any machines configured to reach out to the WSUS server just yet. Group policy will be used to tell the machine to contact the WSUS server so it can issue these updates.
 
 
 <a name="group-policy"></a>
@@ -156,6 +156,7 @@ On the **Group Policy Management Editor** expand **Policies** -> **Administrativ
 
 
 Search the list of items for **Specify intranet Microsoft update service location** and select it. In the Specify intranet Microsoft update service location policy window click **Enabled**. In the **Set intranet update service for detecting updates:** field enter http://<\your server name>\:8530. Copy/paste that value into the second field as well. Keep default settings for the other options. Click **Apply**, then click **Ok**
+>Both fields (update service and statistics server) should point to the same WSUS instance in most environments.
 <img width="1042" height="792" alt="Screenshot from 2025-08-27 12-54-57" src="https://github.com/user-attachments/assets/9bec1b8d-7a7b-47c2-8d3b-9504f34ee54b" />
 
 
@@ -170,7 +171,7 @@ As you can see, I have an OU containing the clients and servers that are in my o
 <img width="1042" height="792" alt="Screenshot from 2025-08-27 14-51-41" src="https://github.com/user-attachments/assets/4fb2f5a1-6199-4ed2-8c97-8437a8bc19ee" />
 
 
-Going back to the Group Policy Mangagement window, I will be linking the OU that I want this policy to apply to. Right-click the OU you wish to apply the policy to, in my case it is the **Clients** OU and select **Link an Existing GPO...** 
+Going back to the Group Policy Management window, I will be linking the OU that I want this policy to apply to. Right-click the OU you wish to apply the policy to, in my case it is the **Clients** OU and select **Link an Existing GPO...** 
 <img width="1042" height="792" alt="Screenshot from 2025-08-27 14-55-20" src="https://github.com/user-attachments/assets/385d0efb-9358-4a14-8253-771d440a3227" />
 
 
@@ -225,6 +226,7 @@ On the **Approve Updates** window click the dropdown menu next to **All Computer
 An **Approval Progress** window should appear and once the approvals are complete you should see something like this. Click **Close**
 
 If you click **Refresh** at the top of the panel, those updates should be gone since they have been approved.
+>Approving updates does not immediately install them on clients, it only makes them available. Clients will download and install them based on the specified GPO schedule.
 <img width="1051" height="881" alt="Screenshot from 2025-09-02 18-12-23" src="https://github.com/user-attachments/assets/7e532913-9f0d-4895-ae75-ae254692de9e" />
 
 
@@ -236,19 +238,7 @@ You can also check the status of the update installs of the machines in your env
 <img width="1058" height="890" alt="Screenshot from 2025-09-02 18-20-30" src="https://github.com/user-attachments/assets/77ad92fb-5341-4e48-bd84-ae96a2ac2a24" />
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+## Conclusion
+In this lab, we installed and configured a WSUS server, synchronized updates from Microsoft Update, and created a Group Policy to direct domain clients to use WSUS. We also explored the approval process to control which updates are deployed. This setup demonstrates how WSUS enables centralized, bandwidth-efficient, and policy-driven update management in an Active Directory environment.
 
 
