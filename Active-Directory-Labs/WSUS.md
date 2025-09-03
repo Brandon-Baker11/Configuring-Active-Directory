@@ -27,6 +27,7 @@ There are two modes in which Downstream Servers can be configured, <strong>Repli
 - [Installing WSUS](#install)
 - [Configuring WSUS](#configure)
 - [Setting Group Policy](#group-policy)
+- [Utilizing Update Approvals](#approvals)
 
 
 <a name="install"></a>
@@ -202,6 +203,46 @@ Scroll down and select **Configured Update Policies**
 
 You should now see the GPOs that we assigned to the WSUS policy from earlier.
 <img width="1052" height="882" alt="Screenshot from 2025-08-27 18-01-13" src="https://github.com/user-attachments/assets/bd8a5d55-c40b-4624-a416-d61c617ac7f0" />
+
+
+<a name="approvals"></a>
+## Utilizing Update Approvals
+Switching back to my WSUS server SVR-1, on the Update Services utility select **Updates** then **All Updates**. This will be the panel where you will approve or deny pending updates for the machines in your environment.
+
+You will also see that the updates that populated are based on the two filters at the top of the window. You are seeing the updates that have an approval state of **Unapproved** and a status of **Failed or Needed**. You can change the filters to populate the specific updates you want to see.
+<img width="1052" height="882" alt="Screenshot from 2025-09-02 17-28-21" src="https://github.com/user-attachments/assets/e803843e-860f-462f-845c-c162e9164864" />
+
+
+To accept these updates you can simply highlight the update you intend to accept. In my lab I'll be accepting them all. Press ctrl+a on your keyboard to highlight all of the items, then right-click them and select **Approve**.
+<img width="1051" height="881" alt="Screenshot from 2025-09-02 18-05-25" src="https://github.com/user-attachments/assets/8157ebd2-55c7-4ec9-821d-3b85996e2fc6" />
+
+
+On the **Approve Updates** window click the dropdown menu next to **All Computers** and select **Approved for install**. Click **Ok** and accept the license terms on behalf of all of the users in your environment.
+<img width="1051" height="881" alt="Screenshot from 2025-09-02 18-08-16" src="https://github.com/user-attachments/assets/7dfe3d9b-44ae-49dc-8c3a-ef835f6b2390" />
+
+
+An **Approval Progress** window should appear and once the approvals are complete you should see something like this. Click **Close**
+
+If you click **Refresh** at the top of the panel, those updates should be gone since they have been approved.
+<img width="1051" height="881" alt="Screenshot from 2025-09-02 18-12-23" src="https://github.com/user-attachments/assets/7e532913-9f0d-4895-ae75-ae254692de9e" />
+
+
+Now if you go to the server in the **Update Services** utility you will see in the **Download Status** section that the files for the updates are being downloaded.
+<img width="1058" height="890" alt="Screenshot from 2025-09-02 18-17-43" src="https://github.com/user-attachments/assets/245ac56b-5b5f-4f2e-8b1c-5c32a6c69801" />
+
+
+You can also check the status of the update installs of the machines in your environment by selecting **All Computers**
+<img width="1058" height="890" alt="Screenshot from 2025-09-02 18-20-30" src="https://github.com/user-attachments/assets/77ad92fb-5341-4e48-bd84-ae96a2ac2a24" />
+
+
+
+
+
+
+
+
+
+
 
 
 
