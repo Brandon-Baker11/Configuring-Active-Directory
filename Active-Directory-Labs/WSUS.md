@@ -20,7 +20,8 @@ There are two modes in which Downstream Servers can be configured, <strong>Repli
 - **Replica Mode** - A server with this configuration inherits the same update approvals and configurations as the upstream server.
 - **Autonomous Mode** A server with this configuration has the independence to manage the update approvals and configurations that are retrieved from the upstream server. This allows granular management over update deployments to network segments.
 > Microsoft Update synchronizes updates with an Upstream WSUS Server. The Downstream WSUS Servers retrieve updates from the upstream, and client PCs connect to WSUS servers (configured via Group Policy) to receive approved updates. Downstream servers can run in replica or autonomous mode.
-![WSUS Architecture Diagram](https://github.com/user-attachments/assets/4bae2df6-b4e1-424b-9df3-90a983108cff)
+<img width="1920" height="1080" alt="WSUS Architecture Diagram" src="https://github.com/user-attachments/assets/79d6f2eb-b0c0-4708-96c2-0e5ce8166731" />
+
 
 
 ## Tasks
