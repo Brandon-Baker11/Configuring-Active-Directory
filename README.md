@@ -12,7 +12,7 @@ This tutorial will show the steps to create a basic Windows network environment 
 
 
 ## Homelab Overview
-<img width="1280" height="720" alt="VMWare Network" src="https://github.com/user-attachments/assets/28e9fe5a-824a-4f9f-a42c-9f6a9644a0fd" />
+<img width="1280" height="720" alt="VMWare Network V2" src="https://github.com/user-attachments/assets/72ddb297-c9ea-4e2a-ab81-4bedbf8d822d" />
 
 
 This Active Directory Homelab is a virtualized Windows network environment built in OracleVM VirtualBox, designed to simulate a production-ready domain setup for hands-on learning and experimentation. The lab currently consists of:
