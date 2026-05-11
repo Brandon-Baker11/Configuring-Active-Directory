@@ -6,7 +6,7 @@ This lab will cover implementing a security feature offered in Windows that is c
 
 
 ## What is Access-Based Enumeration?
-It simplifies the user's experience by hiding shared network folders they don't have permissions to view. This makes it so only the folders and files they are authorized to interact with appear when browsing a shared network folder. ABE filters folders and files based on NTFS permissions that users/groups have. If they don't at least have **Read** permissions, the folder will not be displayed to them. It is important to know that ABE **does not** change any NFTS permissions, it simply hides items the user cannot access based on **NFTS** or **DFS view permissions**. Here are some benefits of implementing ABE in a production environment:
+It simplifies the user's experience by hiding shared network folders they don't have permissions to view. This makes it so only the folders and files they are authorized to interact with appear when browsing a shared network folder. ABE filters folders and files based on NTFS permissions that users/groups have. If they don't at least have **Read** permissions, the folder will not be displayed to them. It is important to know that ABE **does not** change any NTFS permissions, it simply hides items the user cannot access based on **NTFS** or **DFS view permissions**. Here are some benefits of implementing ABE in a production environment:
 - ABE keeps sensitive data from being accessed from unauthorized users by limiting visibility.
 - Users have a simpler interface when interacting with shared network folders.
 - ABE can reduce the "noise" in complex folder structures by hiding irrelevant folders.
@@ -22,7 +22,7 @@ It simplifies the user's experience by hiding shared network folders they don't 
 
 <a name="shared-folder"></a>
 ## Enable ABE for Network Shared Folders
-I am currently logged in as a user on my client machine. This user only has access to the **IT** folder in my **Public Share** shared folder. This is because folder listings are still visible without NFTS access unless ABE is enabled for them. You can see the message that I get when I try to access a different folder the user doesn't have NFTS permissions to.
+I am currently logged in as a user on my client machine. This user only has access to the **IT** folder in my **Public Share** shared folder. This is because folder listings are still visible without NTFS access unless ABE is enabled for them. You can see the message that I get when I try to access a different folder the user doesn't have NTFS permissions to.
 <img width="1072" height="898" alt="Screenshot from 2025-08-10 12-50-47" src="https://github.com/user-attachments/assets/c1799cff-e60e-4ad8-b306-7f1dc7b74019" />
 
 <a name="enable-abe-server-man"></a>
@@ -64,7 +64,7 @@ Click the **Advanced** tab in the **Properties** window and check the box next t
 
 <a name="permissions"></a>
 ## Set DFS View Permissions
-Now we will set explicit access permissions for each of the target folders within the DFS namespace. These are the **view** permissions that we are assigning. **NFTS** permissions still control access for the actual share that the DFS target folders point to. Making these view permission changes will only affect the target folder links.
+Now we will set explicit access permissions for each of the target folders within the DFS namespace. These are the **view** permissions that we are assigning. **NTFS** permissions still control access for the actual share that the DFS target folders point to. Making these view permission changes will only affect the target folder links.
 
 Right-click a target folder in your DFS namespace and select **Properties**
 <img width="1059" height="898" alt="Screenshot from 2025-08-10 14-12-38" src="https://github.com/user-attachments/assets/8af7a55e-4c77-4b79-8a47-b553e26290c7" />
